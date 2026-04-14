@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1284,6 +1284,132 @@
     }
     .footer-bottom-links a:hover { color: var(--text-2); }
 
+    /* ── Theme toggle button ────────────────────────────────────────── */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s var(--ease);
+      color: var(--text-2);
+    }
+    .theme-toggle:hover { border-color: var(--text-3); background: rgba(128,128,128,0.08); }
+    .theme-toggle:active { transform: scale(0.95); }
+    .theme-toggle svg { width: 15px; height: 15px; }
+
+    /* ── Light theme ────────────────────────────────────────────────── */
+    [data-theme="light"] {
+      --bg:            #fafafa;
+      --bg-2:          #f0f0f2;
+      --bg-3:          #e4e4e7;
+      --text:          #09090b;
+      --text-2:        #52525b;
+      --text-3:        #a1a1aa;
+      --border:        #d4d4d8;
+      --border-subtle: #e4e4e7;
+      --white:         #09090b;
+    }
+
+    /* Transition all color changes smoothly */
+    [data-theme="light"] *,
+    [data-theme="dark"] * {
+      transition-property: background-color, border-color, color;
+      transition-duration: 0.25s;
+      transition-timing-function: var(--ease-std);
+    }
+    /* But don't slow down interactive transitions already defined */
+    [data-theme="light"] .nav-cta,
+    [data-theme="dark"] .nav-cta,
+    [data-theme="light"] .btn-primary,
+    [data-theme="dark"] .btn-primary,
+    [data-theme="light"] .reveal,
+    [data-theme="dark"] .reveal {
+      transition-property: opacity, transform, background-color, border-color, color;
+    }
+
+    /* Nav scrolled backdrop */
+    [data-theme="light"] .nav.scrolled {
+      background: rgba(250, 250, 250, 0.92);
+    }
+    /* Nav CTA inverted */
+    [data-theme="light"] .nav-cta { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+    [data-theme="light"] .nav-cta:hover { background: var(--bg-3); }
+
+    /* btn-primary inverted */
+    [data-theme="light"] .btn-primary { background: var(--bg); color: #fafafa; }
+    [data-theme="light"] .btn-primary:hover { background: #27272a; }
+
+    /* Hero dot grid */
+    [data-theme="light"] .hero::before {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+    }
+    [data-theme="light"] .hero::after {
+      background: radial-gradient(ellipse 70% 80% at 20% 50%, rgba(250,250,250,0) 0%, rgba(250,250,250,0.65) 100%);
+    }
+    /* Hero geometric rings */
+    [data-theme="light"] .hero-geo::before { border-color: rgba(0,0,0,0.08); }
+    [data-theme="light"] .hero-geo::after  { border-color: rgba(0,0,0,0.1); }
+    [data-theme="light"] .geo-cross::before { background: rgba(0,0,0,0.06); }
+    [data-theme="light"] .geo-cross::after  { background: rgba(0,0,0,0.06); }
+    [data-theme="light"] .geo-center { border-color: rgba(0,0,0,0.14); }
+    [data-theme="light"] .geo-inner-sq { background: rgba(0,0,0,0.06); }
+    [data-theme="light"] .geo-label { color: rgba(0,0,0,0.18); }
+
+    /* Case visuals */
+    [data-theme="light"] .cv-1::before {
+      background:
+        linear-gradient(90deg, transparent 49.5%, rgba(0,0,0,0.04) 49.5%, rgba(0,0,0,0.04) 50.5%, transparent 50.5%),
+        linear-gradient(0deg,  transparent 49.5%, rgba(0,0,0,0.04) 49.5%, rgba(0,0,0,0.04) 50.5%, transparent 50.5%),
+        repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(0,0,0,0.025) 79px, rgba(0,0,0,0.025) 80px),
+        repeating-linear-gradient(0deg,  transparent 0, transparent 79px, rgba(0,0,0,0.025) 79px, rgba(0,0,0,0.025) 80px);
+    }
+    [data-theme="light"] .cv-1 .visual-float        { border-color: rgba(0,0,0,0.1); }
+    [data-theme="light"] .cv-1 .visual-float::before { border-color: rgba(0,0,0,0.14); }
+    [data-theme="light"] .cv-1 .visual-label         { color: rgba(0,0,0,0.2); }
+
+    [data-theme="light"] .cv-2::before {
+      background: repeating-linear-gradient(
+        -45deg, transparent 0, transparent 18px,
+        rgba(0,0,0,0.025) 18px, rgba(0,0,0,0.025) 19px
+      );
+    }
+    [data-theme="light"] .wave-bar { background: rgba(0,0,0,0.14); }
+
+    [data-theme="light"] .cv-3::before {
+      background: radial-gradient(ellipse at 60% 50%, rgba(0,0,0,0.04) 0%, transparent 70%);
+    }
+    [data-theme="light"] .node          { border-color: rgba(0,0,0,0.16); }
+    [data-theme="light"] .node::before  { background: rgba(0,0,0,0.1); }
+
+    /* EAA visual */
+    [data-theme="light"] .eaa-visual::before {
+      background:
+        repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(0,0,0,0.025) 79px, rgba(0,0,0,0.025) 80px),
+        repeating-linear-gradient(0deg,  transparent 0, transparent 39px,  rgba(0,0,0,0.025) 39px,  rgba(0,0,0,0.025) 40px);
+    }
+    [data-theme="light"] .eaa-bar-fill { background: rgba(0,0,0,0.5); }
+    [data-theme="light"] .eaa-score    { color: rgba(0,0,0,0.4); }
+
+    /* Proof logos */
+    [data-theme="light"] .proof-logo { color: rgba(0,0,0,0.2); }
+    [data-theme="light"] .proof-logo:hover { color: rgba(0,0,0,0.5); }
+
+    /* Perspective arrow icon */
+    [data-theme="light"] .perspective-arrow svg { stroke: var(--text-3); }
+
+    /* case-link hover */
+    [data-theme="light"] .case-link:hover { color: var(--text); border-color: var(--text-2); }
+
+    /* Footer */
+    [data-theme="light"] .footer { background: var(--bg-2); }
+    [data-theme="light"] .footer-address a { color: var(--text-2); }
+
     /* ── Responsive ─────────────────────────────────────────────────── */
     @media (max-width: 1024px) {
       .industries-grid {
@@ -1339,6 +1465,11 @@
           <li><a href="#about">About</a></li>
           <li><a href="#careers">Careers</a></li>
         </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" id="themeIcon">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
         <a href="#contact" class="nav-cta">Let's talk <span class="arrow">→</span></a>
       </div>
     </div>
@@ -1972,9 +2103,36 @@
     }
 
     /* ── Hero entrance animation ─────────────────────────────── */
-    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+    document.querySelectorAll('.hero .reveal').forEach((el) => {
       el.classList.add('visible');
     });
+
+    /* ── Theme toggle ────────────────────────────────────────── */
+    const html = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    const moonSVG = `<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>`;
+    const sunSVG  = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      themeIcon.innerHTML = theme === 'dark' ? moonSVG : sunSVG;
+      localStorage.setItem('alm-theme', theme);
+      // Update Roche SVG line color dynamically
+      document.querySelectorAll('#dataNodes line').forEach(l =>
+        l.setAttribute('stroke', theme === 'dark' ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.1)')
+      );
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // Restore saved preference
+    const saved = localStorage.getItem('alm-theme');
+    if (saved) applyTheme(saved);
+    else applyTheme('dark');
   </script>
 </body>
 </html>
