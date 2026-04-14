@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alm engineering — The engineering partner Europe's enterprises build with</title>
+  <meta name="description" content="We ship the software, AI and digital products that European enterprises like Roche, BMW and ProSiebenSat.1 run their business on. Independent. Munich-born.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:            #09090b;
+      --bg-2:          #111113;
+      --bg-3:          #18181b;
+      --text:          #fafafa;
+      --text-2:        #a1a1aa;
+      --text-3:        #52525b;
+      --border:        #27272a;
+      --border-subtle: #1c1c1e;
+      --white:         #ffffff;
+
+      --font-display:  'Space Grotesk', system-ui, sans-serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+
+      --section-gap:   clamp(96px, 12vw, 160px);
+      --ease:          cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-std:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Reset ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ── Utility ────────────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 4vw, 64px);
+    }
+    .label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 0.4s var(--ease-std), border-color 0.4s var(--ease-std);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(9, 9, 11, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--border-subtle);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--text-3); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      background: var(--white);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s var(--ease);
+      flex-shrink: 0;
+    }
+    .nav-cta:hover { background: #e4e4e7; }
+    .nav-cta:active { transform: scale(0.98); }
+
+    /* ── Hero ───────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    /* Dot-grid background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Gradient fade from left */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 20% 50%, rgba(9,9,11,0) 0%, rgba(9,9,11,0.6) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(60px, 8vw, 120px) 0 clamp(60px, 8vw, 120px) 0;
+      padding-left: clamp(24px, 4vw, 64px);
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .hero-eyebrow-line {
+      width: 32px;
+      height: 1px;
+      background: var(--text-3);
+    }
+    .hero-eyebrow span {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6.5vw, 90px);
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 36px;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--text-2);
+    }
+    .hero-subline {
+      font-size: clamp(15px, 1.1vw, 17px);
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 48ch;
+      margin-bottom: 48px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--white);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s var(--ease);
+    }
+    .btn-primary:hover { background: #e4e4e7; }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      color: var(--text-2);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-2); }
+    .arrow { display: inline-block; transition: transform 0.2s var(--ease); }
+    .btn-primary:hover .arrow,
+    .btn-ghost:hover .arrow { transform: translateX(4px); }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+    .hero-meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--text-3);
+    }
+
+    /* Hero Right – Abstract visual */
+    .hero-right {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-geo {
+      position: relative;
+      width: clamp(300px, 40vw, 560px);
+      height: clamp(300px, 40vw, 560px);
+    }
+    /* Outer ring */
+    .hero-geo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+      animation: rotate 24s linear infinite;
+    }
+    /* Inner ring */
+    .hero-geo::after {
+      content: '';
+      position: absolute;
+      inset: 20%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      animation: rotate 16s linear infinite reverse;
+    }
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+    .geo-cross {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .geo-cross::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 60%;
+      background: rgba(255,255,255,0.06);
+    }
+    .geo-cross::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 60%;
+      background: rgba(255,255,255,0.06);
+    }
+    .geo-center {
+      width: clamp(100px, 12vw, 160px);
+      height: clamp(100px, 12vw, 160px);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .geo-inner-sq {
+      width: 50%;
+      height: 50%;
+      background: rgba(255,255,255,0.05);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.06); }
+    }
+    .geo-label {
+      position: absolute;
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+      white-space: nowrap;
+    }
+
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: clamp(24px, 4vw, 64px);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .scroll-line {
+      width: 24px;
+      height: 1px;
+      background: var(--text-3);
+    }
+    .scroll-text {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ── Ticker ─────────────────────────────────────────────────────── */
+    .ticker {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+      padding: 14px 0;
+      background: var(--bg-2);
+    }
+    .ticker-inner {
+      display: flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+      width: max-content;
+    }
+    @keyframes ticker {
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-right: 32px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+    .ticker-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    /* ── Section shared ─────────────────────────────────────────────── */
+    section { position: relative; }
+    .section-pad {
+      padding: var(--section-gap) 0;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: clamp(48px, 6vw, 80px);
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: var(--white);
+    }
+    .section-link {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .section-link:hover { color: var(--text); }
+    .section-link:hover .arrow { transform: translateX(4px); }
+
+    /* ── Proof Wall ─────────────────────────────────────────────────── */
+    .proof {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .proof-kicker {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .proof-logos {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(24px, 3vw, 48px);
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .proof-logo {
+      font-family: var(--font-display);
+      font-size: clamp(14px, 1.6vw, 20px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.18);
+      transition: color 0.3s var(--ease);
+      cursor: default;
+    }
+    .proof-logo:hover { color: rgba(255,255,255,0.5); }
+    .proof-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      border-top: 1px solid var(--border-subtle);
+    }
+    .proof-stat {
+      background: var(--bg);
+      padding: 36px 32px;
+    }
+    .proof-stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .proof-stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.4;
+    }
+
+    /* ── Cases ──────────────────────────────────────────────────────── */
+    .cases { border-top: 1px solid var(--border-subtle); }
+    .case-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: clamp(380px, 50vh, 580px);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+    .case-item:nth-child(even) .case-content { order: 2; }
+    .case-item:nth-child(even) .case-visual { order: 1; }
+    .case-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(40px, 5vw, 80px) clamp(24px, 4vw, 64px);
+    }
+    .case-number {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 24px;
+    }
+    .case-client {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 16px;
+    }
+    .case-headline {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .case-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 44ch;
+      margin-bottom: 32px;
+    }
+    .case-metrics {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+    .case-metric-val {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .case-metric-label {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-3);
+      margin-top: 4px;
+    }
+    .case-link {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .case-link:hover { color: var(--white); border-color: var(--text-2); }
+    .case-link:hover .arrow { transform: translateX(4px); }
+    .case-visual {
+      position: relative;
+      background: var(--bg-2);
+      overflow: hidden;
+      min-height: 320px;
+    }
+    /* Visual 1 — BMW: blue-grey circuit lines */
+    .cv-1 {
+      background: var(--bg-2);
+    }
+    .cv-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.03) 49.5%, rgba(255,255,255,0.03) 50.5%, transparent 50.5%),
+        linear-gradient(0deg, transparent 49.5%, rgba(255,255,255,0.03) 49.5%, rgba(255,255,255,0.03) 50.5%, transparent 50.5%),
+        repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(255,255,255,0.02) 79px, rgba(255,255,255,0.02) 80px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 79px, rgba(255,255,255,0.02) 79px, rgba(255,255,255,0.02) 80px);
+    }
+    .cv-1 .visual-float {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cv-1 .visual-float::before {
+      content: '';
+      width: 80px;
+      height: 80px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+    }
+    .cv-1 .visual-label {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* Visual 2 — P7S1: waveform */
+    .cv-2 { background: #0d0d10; }
+    .cv-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent 0,
+          transparent 18px,
+          rgba(255,255,255,0.015) 18px,
+          rgba(255,255,255,0.015) 19px
+        );
+    }
+    .waveform {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 0 40px;
+    }
+    .wave-bar {
+      flex: 1;
+      background: rgba(255,255,255,0.1);
+      border-radius: 1px;
+      animation: wave 1.8s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 100% { height: 8px; }
+      50% { height: var(--h); }
+    }
+
+    /* Visual 3 — Roche */
+    .cv-3 { background: #0d0e0f; }
+    .cv-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(255,255,255,0.03) 0%, transparent 70%);
+    }
+    .data-nodes {
+      position: absolute;
+      inset: 0;
+    }
+    .node {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+    }
+    .node::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+
+    /* ── Industries ─────────────────────────────────────────────────── */
+    .industries {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--border-subtle);
+    }
+    .ind-card {
+      background: var(--bg);
+      padding: clamp(32px, 3.5vw, 52px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      transition: background 0.3s var(--ease);
+      cursor: default;
+    }
+    .ind-card:hover { background: var(--bg-2); }
+    .ind-card.featured {
+      grid-row: 1 / 3;
+      min-height: 480px;
+    }
+    .ind-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .ind-icon svg { width: 16px; height: 16px; stroke: var(--text-3); }
+    .ind-name {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .ind-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 36ch;
+    }
+    .ind-client {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+    .ind-card:hover .ind-client { color: var(--text-2); }
+    .ind-client::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── Capabilities ───────────────────────────────────────────────── */
+    .capabilities {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+    }
+    .cap-card {
+      background: var(--bg);
+      padding: clamp(28px, 3vw, 48px) clamp(24px, 2.5vw, 40px);
+      transition: background 0.3s var(--ease);
+    }
+    .cap-card:hover { background: var(--bg-2); }
+    .cap-num {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--text-3);
+      margin-bottom: 48px;
+    }
+    .cap-name {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.6vw, 22px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cap-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.65;
+    }
+    .cap-tags {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .cap-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .cap-card:hover .cap-tag { border-color: var(--text-3); color: var(--text-2); }
+
+    /* ── EAA Feature ────────────────────────────────────────────────── */
+    .eaa {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .eaa-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+    .eaa-label {
+      margin-bottom: 24px;
+    }
+    .eaa-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .eaa-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 50ch;
+    }
+    .eaa-stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 16px 24px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      margin-bottom: 36px;
+    }
+    .eaa-stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+    .eaa-stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+    }
+    .eaa-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .eaa-visual {
+      position: relative;
+      background: var(--bg-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .eaa-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(255,255,255,0.015) 79px, rgba(255,255,255,0.015) 80px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px);
+    }
+    .eaa-screen {
+      position: absolute;
+      inset: 24px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .eaa-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 1px;
+      overflow: hidden;
+      position: relative;
+    }
+    .eaa-bar-fill {
+      height: 100%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 1px;
+    }
+    .eaa-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eaa-bar-title {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .eaa-score {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── Perspectives ───────────────────────────────────────────────── */
+    .perspectives {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .perspectives-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+    }
+    .perspective-card {
+      background: var(--bg);
+      padding: clamp(32px, 3.5vw, 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      transition: background 0.3s var(--ease);
+    }
+    .perspective-card:hover { background: var(--bg-2); }
+    .perspective-card.featured { min-height: 400px; }
+    .perspective-tag {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 28px;
+    }
+    .perspective-title {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      color: var(--white);
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .perspective-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .perspective-date {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 300;
+    }
+    .perspective-arrow {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .perspective-card:hover .perspective-arrow {
+      border-color: var(--text-3);
+      background: rgba(255,255,255,0.04);
+    }
+    .perspective-arrow svg { width: 12px; height: 12px; stroke: var(--text-3); }
+
+    /* ── About Numbers ──────────────────────────────────────────────── */
+    .about-numbers {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+    .about-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .about-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 50ch;
+    }
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+    }
+    .about-stat {
+      background: var(--bg-2);
+      padding: clamp(28px, 3vw, 44px);
+    }
+    .about-stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .about-stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.4;
+    }
+
+    /* ── Careers ────────────────────────────────────────────────────── */
+    .careers {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .careers-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .careers-left { flex: 1; min-width: 280px; }
+    .careers-count {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      color: rgba(255,255,255,0.08);
+      line-height: 0.85;
+      margin-bottom: 20px;
+    }
+    .careers-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .careers-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .careers-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border-subtle);
+      min-width: 320px;
+    }
+    .role-item {
+      background: var(--bg);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .role-item:hover { background: var(--bg-2); }
+    .role-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .role-meta {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+    .role-tag {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: clamp(64px, 8vw, 100px) 0 40px;
+      background: var(--bg-2);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: clamp(40px, 4vw, 64px);
+      margin-bottom: clamp(56px, 6vw, 80px);
+      padding-bottom: clamp(48px, 5vw, 64px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-brand-name span { color: var(--text-3); }
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.6;
+      max-width: 36ch;
+      margin-bottom: 28px;
+    }
+    .footer-address {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.8;
+      font-style: normal;
+    }
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-legal {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-3);
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-bottom-links a {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: var(--text-2); }
+
+    /* ── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .industries-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .ind-card.featured { grid-column: 1 / -1; grid-row: auto; min-height: 280px; }
+      .cap-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .perspectives-grid { grid-template-columns: 1fr 1fr; }
+      .perspectives-grid .perspective-card.featured { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-right { display: none; }
+      .hero-left { padding: 100px 24px 80px; }
+      .case-item { grid-template-columns: 1fr; }
+      .case-item:nth-child(even) .case-content { order: 1; }
+      .case-item:nth-child(even) .case-visual { order: 2; }
+      .case-visual { min-height: 240px; }
+      .about-inner { grid-template-columns: 1fr; }
+      .eaa-inner { grid-template-columns: 1fr; }
+      .industries-grid { grid-template-columns: 1fr; }
+      .ind-card.featured { min-height: auto; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .perspectives-grid { grid-template-columns: 1fr; }
+      .proof-stats { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .careers-inner { flex-direction: column; }
+      .careers-roles { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .proof-stats { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">alm<span>.</span></a>
+        <ul class="nav-links">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#careers">Careers</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Let's talk <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow reveal">
+        <div class="hero-eyebrow-line"></div>
+        <span>Digital Engineering · Munich</span>
+      </div>
+      <h1 class="hero-headline reveal reveal-delay-1">
+        The engineering<br>
+        partner <em>Europe's</em><br>
+        enterprises<br>
+        build with.
+      </h1>
+      <p class="hero-subline reveal reveal-delay-2">
+        We ship the software, AI and digital products that European brands
+        like Roche, BMW and ProSiebenSat.1 run their business on.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#work" class="btn-primary">Our work <span class="arrow">→</span></a>
+        <a href="#about" class="btn-ghost">How we work <span class="arrow">→</span></a>
+      </div>
+      <div class="hero-meta reveal reveal-delay-4">
+        <span class="hero-meta-item">Munich</span>
+        <div class="hero-meta-dot"></div>
+        <span class="hero-meta-item">Berlin</span>
+        <div class="hero-meta-dot"></div>
+        <span class="hero-meta-item">Independent</span>
+        <div class="hero-meta-dot"></div>
+        <span class="hero-meta-item">European by design</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-geo">
+          <div class="geo-cross">
+            <div class="geo-center">
+              <div class="geo-inner-sq"></div>
+            </div>
+          </div>
+          <div class="geo-label">Engineering. Precision.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── Ticker ────────────────────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <!-- Repeated twice for seamless loop -->
+      <div class="ticker-item">Engineering<span class="ticker-dot"></span>European Enterprises<span class="ticker-dot"></span>Digital Products<span class="ticker-dot"></span>AI Systems<span class="ticker-dot"></span>Independent<span class="ticker-dot"></span>Munich-Born<span class="ticker-dot"></span>Mission-Critical Software<span class="ticker-dot"></span>Enterprise-Grade<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Engineering<span class="ticker-dot"></span>European Enterprises<span class="ticker-dot"></span>Digital Products<span class="ticker-dot"></span>AI Systems<span class="ticker-dot"></span>Independent<span class="ticker-dot"></span>Munich-Born<span class="ticker-dot"></span>Mission-Critical Software<span class="ticker-dot"></span>Enterprise-Grade<span class="ticker-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- ── Proof Wall ────────────────────────────────────────────────── -->
+  <section class="proof section-pad">
+    <div class="container">
+      <div class="proof-kicker reveal">
+        <span class="label">Trusted by Europe's most demanding brands</span>
+      </div>
+      <div class="proof-logos reveal reveal-delay-1">
+        <div class="proof-logo">ProSiebenSat.1</div>
+        <div class="proof-logo">Roche</div>
+        <div class="proof-logo">BMW</div>
+        <div class="proof-logo">MediaMarkt</div>
+        <div class="proof-logo">Allianz</div>
+        <div class="proof-logo">Scout24</div>
+      </div>
+    </div>
+    <div class="proof-stats reveal">
+      <div class="proof-stat">
+        <div class="proof-stat-number" data-count="12">12</div>
+        <div class="proof-stat-label">Years engineering<br>European enterprises</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">80<span style="font-size:0.6em;color:var(--text-3)">+</span></div>
+        <div class="proof-stat-label">Shipped products<br>in production</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">6</div>
+        <div class="proof-stat-label">European markets<br>served</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">70<span style="font-size:0.6em;color:var(--text-3)">+</span></div>
+        <div class="proof-stat-label">Engineers, designers<br>and AI specialists</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured Cases ────────────────────────────────────────────── -->
+  <section class="cases section-pad" id="work">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Selected work.</h2>
+        <a href="#" class="section-link">All case studies <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- Case 1: BMW -->
+    <div class="case-item reveal">
+      <div class="case-content">
+        <div class="case-number">01 / 03</div>
+        <div class="case-client">Built with BMW</div>
+        <h3 class="case-headline">We engineered the EV charging experience for 2.4M+ European drivers.</h3>
+        <p class="case-body">In partnership with BMW's digital unit, alm delivered a unified charging and payment flow that replaced three legacy systems across 8 European markets.</p>
+        <div class="case-metrics">
+          <div>
+            <div class="case-metric-val">2.4M+</div>
+            <div class="case-metric-label">Active users</div>
+          </div>
+          <div>
+            <div class="case-metric-val">−38%</div>
+            <div class="case-metric-label">Support tickets</div>
+          </div>
+          <div>
+            <div class="case-metric-val">8</div>
+            <div class="case-metric-label">Markets launched</div>
+          </div>
+        </div>
+        <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
+      </div>
+      <div class="case-visual cv-1">
+        <div class="visual-float"></div>
+        <div class="visual-label">Automotive · Mobility</div>
+      </div>
+    </div>
+
+    <!-- Case 2: ProSiebenSat.1 -->
+    <div class="case-item reveal">
+      <div class="case-content">
+        <div class="case-number">02 / 03</div>
+        <div class="case-client">Built with ProSiebenSat.1</div>
+        <h3 class="case-headline">We rebuilt the streaming infrastructure that 12M+ Europeans rely on monthly.</h3>
+        <p class="case-body">A complete re-engineering of the content delivery platform — from monolith to event-driven architecture — handling peak loads across five broadcasting brands simultaneously.</p>
+        <div class="case-metrics">
+          <div>
+            <div class="case-metric-val">12M+</div>
+            <div class="case-metric-label">Monthly active users</div>
+          </div>
+          <div>
+            <div class="case-metric-val">99.97%</div>
+            <div class="case-metric-label">Uptime achieved</div>
+          </div>
+          <div>
+            <div class="case-metric-val">5</div>
+            <div class="case-metric-label">Brands migrated</div>
+          </div>
+        </div>
+        <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
+      </div>
+      <div class="case-visual cv-2">
+        <div class="waveform" id="waveform"></div>
+        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Media · Entertainment</div>
+      </div>
+    </div>
+
+    <!-- Case 3: Roche -->
+    <div class="case-item reveal">
+      <div class="case-content">
+        <div class="case-number">03 / 03</div>
+        <div class="case-client">Built with Roche</div>
+        <h3 class="case-headline">We shipped the clinical data platform 4,000+ researchers depend on.</h3>
+        <p class="case-body">A regulated, IEC 62304-compliant platform for clinical data management — engineered to meet the strictest EU MDR requirements while remaining fast enough for daily research workflows.</p>
+        <div class="case-metrics">
+          <div>
+            <div class="case-metric-val">4,000+</div>
+            <div class="case-metric-label">Active researchers</div>
+          </div>
+          <div>
+            <div class="case-metric-val">EU MDR</div>
+            <div class="case-metric-label">Compliant</div>
+          </div>
+          <div>
+            <div class="case-metric-val">−52%</div>
+            <div class="case-metric-label">Data retrieval time</div>
+          </div>
+        </div>
+        <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
+      </div>
+      <div class="case-visual cv-3">
+        <div class="data-nodes" id="dataNodes"></div>
+        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Pharma · Life Sciences</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Industries ────────────────────────────────────────────────── -->
+  <section class="industries section-pad" id="industries">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Industry practices.</h2>
+        <a href="#" class="section-link">All industries <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <div class="industries-grid reveal">
+      <!-- Featured: Automotive -->
+      <div class="ind-card featured">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13L7 6h10l2 7"/><path d="M3 13h18v4a1 1 0 01-1 1H4a1 1 0 01-1-1v-4z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+          </div>
+          <h3 class="ind-name">Automotive<br>&amp; Mobility</h3>
+          <p class="ind-desc">Connected vehicles, EV charging, fleet management, and in-car digital experiences for Europe's automotive leaders.</p>
+        </div>
+        <div class="ind-client">Recent: BMW</div>
+      </div>
+
+      <!-- Media -->
+      <div class="ind-card">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3L12 7 8 3"/></svg>
+          </div>
+          <h3 class="ind-name">Media &amp;<br>Entertainment</h3>
+          <p class="ind-desc">Streaming platforms, content ops, and audience technology at broadcast scale.</p>
+        </div>
+        <div class="ind-client">Recent: ProSiebenSat.1</div>
+      </div>
+
+      <!-- Pharma -->
+      <div class="ind-card">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h3 class="ind-name">Pharma &amp;<br>Life Sciences</h3>
+          <p class="ind-desc">Regulated software, clinical tools, and patient-facing platforms under EU MDR and IEC 62304.</p>
+        </div>
+        <div class="ind-client">Recent: Roche</div>
+      </div>
+
+      <!-- Insurance -->
+      <div class="ind-card">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5-4 9-9 10C7 21 3 17 3 12V6l9-4z"/></svg>
+          </div>
+          <h3 class="ind-name">Insurance &amp;<br>Financial Services</h3>
+          <p class="ind-desc">Digital claims, broker platforms, compliance tooling, and customer portals at enterprise scale.</p>
+        </div>
+        <div class="ind-client">Recent: Allianz</div>
+      </div>
+
+      <!-- Retail -->
+      <div class="ind-card">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <h3 class="ind-name">Retail &amp;<br>Commerce</h3>
+          <p class="ind-desc">Store technology, loyalty platforms, omnichannel commerce, and POS integrations.</p>
+        </div>
+        <div class="ind-client">Recent: MediaMarkt</div>
+      </div>
+
+      <!-- Classifieds -->
+      <div class="ind-card">
+        <div>
+          <div class="ind-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="ind-name">Classifieds &amp;<br>Marketplaces</h3>
+          <p class="ind-desc">Platform engineering, trust and safety, search infrastructure, and growth tooling for marketplace leaders.</p>
+        </div>
+        <div class="ind-client">Recent: Scout24</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Capabilities ──────────────────────────────────────────────── -->
+  <section class="capabilities section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Capabilities.</h2>
+      </div>
+    </div>
+    <div class="cap-grid reveal">
+      <div class="cap-card">
+        <div class="cap-num">01</div>
+        <div class="cap-name">Digital Products</div>
+        <div class="cap-desc">Scalable, secure web and mobile applications engineered for European enterprise requirements — from MVP to mission-critical production.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">Web Apps</span>
+          <span class="cap-tag">Mobile</span>
+          <span class="cap-tag">Platform Eng.</span>
+          <span class="cap-tag">APIs</span>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">02</div>
+        <div class="cap-name">AI Engineering</div>
+        <div class="cap-desc">Custom LLM integrations, RAG architectures, and intelligent agents that ship into regulated production environments — not just PoCs.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">LLM Integration</span>
+          <span class="cap-tag">RAG</span>
+          <span class="cap-tag">Agents</span>
+          <span class="cap-tag">ML Ops</span>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">03</div>
+        <div class="cap-name">Design &amp; Research</div>
+        <div class="cap-desc">User research, UX strategy, and systems-level UI design that serves both end users and enterprise governance requirements.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">UX Research</span>
+          <span class="cap-tag">UI Design</span>
+          <span class="cap-tag">Brand Strategy</span>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">04</div>
+        <div class="cap-name">Media Production</div>
+        <div class="cap-desc">Video, podcasts, and content for enterprise brands — produced to broadcast quality, distributed for digital-first audiences.</div>
+        <div class="cap-tags">
+          <span class="cap-tag">Film</span>
+          <span class="cap-tag">Podcast</span>
+          <span class="cap-tag">Content Strategy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EAA Feature ────────────────────────────────────────────────── -->
+  <section class="eaa section-pad">
+    <div class="container">
+      <div class="eaa-inner">
+        <div class="reveal">
+          <div class="eaa-label">
+            <span class="label">An alm initiative</span>
+          </div>
+          <h2 class="eaa-title">The EAA Compliance Checker.</h2>
+          <p class="eaa-body">The European Accessibility Act came into force in June 2025. We built a free tool that helps European companies assess where they stand — and what it takes to get compliant before enforcement begins.</p>
+          <div class="eaa-stat">
+            <span class="eaa-stat-num">3,200+</span>
+            <span class="eaa-stat-label">companies have checked<br>their compliance so far</span>
+          </div>
+          <div class="eaa-actions">
+            <a href="#" class="btn-primary">Try the tool <span class="arrow">→</span></a>
+            <a href="#" class="btn-ghost">Read the report <span class="arrow">→</span></a>
+          </div>
+        </div>
+        <div class="eaa-visual reveal reveal-delay-2">
+          <div class="eaa-screen">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <span style="font-family:var(--font-display);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3)">EAA Compliance Score</span>
+            </div>
+            <div class="eaa-bar-row">
+              <span class="eaa-bar-title">Perceivable</span>
+              <div class="eaa-bar" style="flex:1"><div class="eaa-bar-fill" style="width:78%"></div></div>
+              <span style="font-family:var(--font-display);font-size:10px;color:var(--text-3)">78</span>
+            </div>
+            <div class="eaa-bar-row">
+              <span class="eaa-bar-title">Operable</span>
+              <div class="eaa-bar" style="flex:1"><div class="eaa-bar-fill" style="width:62%"></div></div>
+              <span style="font-family:var(--font-display);font-size:10px;color:var(--text-3)">62</span>
+            </div>
+            <div class="eaa-bar-row">
+              <span class="eaa-bar-title">Understandable</span>
+              <div class="eaa-bar" style="flex:1"><div class="eaa-bar-fill" style="width:91%"></div></div>
+              <span style="font-family:var(--font-display);font-size:10px;color:var(--text-3)">91</span>
+            </div>
+            <div class="eaa-bar-row">
+              <span class="eaa-bar-title">Robust</span>
+              <div class="eaa-bar" style="flex:1"><div class="eaa-bar-fill" style="width:55%"></div></div>
+              <span style="font-family:var(--font-display);font-size:10px;color:var(--text-3)">55</span>
+            </div>
+            <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border)">
+              <span style="font-family:var(--font-display);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3)">Overall · Partial Compliance</span>
+            </div>
+            <div class="eaa-score">71</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Perspectives ──────────────────────────────────────────────── -->
+  <section class="perspectives section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Perspectives.</h2>
+        <a href="#" class="section-link">All articles <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <div class="perspectives-grid reveal">
+      <div class="perspective-card featured">
+        <div class="perspective-tag">Engineering · AI</div>
+        <div class="perspective-title">Why European automotive needs its own AI stack — and why importing one from Silicon Valley won't work.</div>
+        <div class="perspective-meta">
+          <span class="perspective-date">March 2026</span>
+          <div class="perspective-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="perspective-card">
+        <div class="perspective-tag">Product</div>
+        <div class="perspective-title">AI pilots don't fail on the model. They fail on deployment.</div>
+        <div class="perspective-meta">
+          <span class="perspective-date">February 2026</span>
+          <div class="perspective-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="perspective-card">
+        <div class="perspective-tag">Compliance · EAA</div>
+        <div class="perspective-title">The hidden cost of non-compliance under the EAA — and who is most exposed.</div>
+        <div class="perspective-meta">
+          <span class="perspective-date">January 2026</span>
+          <div class="perspective-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About / Numbers ───────────────────────────────────────────── -->
+  <section class="about-numbers section-pad" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="reveal">
+          <h2 class="about-title">An independent engineering firm.<br>Headquartered in Munich.</h2>
+          <p class="about-body">alm is not a creative agency. We are an engineering partner — independent from holdings, embedded in European enterprise reality, and accountable to outcomes that ship into production and stay there.</p>
+          <div class="about-badge">
+            <div class="badge-dot"></div>
+            Independent · No holding, no compromise
+          </div>
+        </div>
+        <div class="about-stats reveal reveal-delay-2">
+          <div class="about-stat">
+            <div class="about-stat-num">2014</div>
+            <div class="about-stat-label">Year founded,<br>Munich</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">70+</div>
+            <div class="about-stat-label">Engineers, designers<br>&amp; AI specialists</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">80+</div>
+            <div class="about-stat-label">Products shipped<br>into production</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">6</div>
+            <div class="about-stat-label">European markets<br>served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Careers ────────────────────────────────────────────────────── -->
+  <section class="careers section-pad" id="careers">
+    <div class="container">
+      <div class="careers-inner">
+        <div class="careers-left reveal">
+          <div class="careers-count">08</div>
+          <h2 class="careers-title">Open positions.</h2>
+          <p class="careers-sub">We're growing our engineering, design,<br>and AI teams. Munich, Berlin, and remote.</p>
+        </div>
+        <div class="careers-roles reveal reveal-delay-2">
+          <div class="role-item">
+            <div>
+              <div class="role-name">Senior Backend Engineer</div>
+              <div class="role-meta">Munich · Full-time</div>
+            </div>
+            <span class="role-tag">Engineering</span>
+          </div>
+          <div class="role-item">
+            <div>
+              <div class="role-name">AI/ML Engineer</div>
+              <div class="role-meta">Munich / Remote · Full-time</div>
+            </div>
+            <span class="role-tag">AI</span>
+          </div>
+          <div class="role-item">
+            <div>
+              <div class="role-name">Senior UX Designer</div>
+              <div class="role-meta">Munich · Full-time</div>
+            </div>
+            <span class="role-tag">Design</span>
+          </div>
+          <div class="role-item">
+            <div>
+              <div class="role-name">Engineering Lead</div>
+              <div class="role-meta">Munich · Full-time</div>
+            </div>
+            <span class="role-tag">Leadership</span>
+          </div>
+          <div class="role-item" style="justify-content:center;padding:16px 28px;">
+            <a href="#" class="section-link" style="font-size:11px">All 8 open roles <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">alm<span>.</span></div>
+          <p class="footer-tagline">The engineering partner Europe's enterprises build with. Independent. Munich-born. European by design.</p>
+          <address class="footer-address">
+            alm engineering GmbH<br>
+            München, Germany<br>
+            <a href="mailto:hello@alm.sh" style="color:var(--text-2);transition:color 0.2s" onmouseover="this.style.color='white'" onmouseout="this.style.color=''">hello@alm.sh</a>
+          </address>
+        </div>
+        <div>
+          <div class="footer-col-title">Work</div>
+          <ul class="footer-links">
+            <li><a href="#">Automotive &amp; Mobility</a></li>
+            <li><a href="#">Media &amp; Entertainment</a></li>
+            <li><a href="#">Pharma &amp; Life Sciences</a></li>
+            <li><a href="#">Insurance &amp; Finance</a></li>
+            <li><a href="#">Retail &amp; Commerce</a></li>
+            <li><a href="#">Classifieds &amp; Marketplaces</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#">Digital Products</a></li>
+            <li><a href="#">AI Engineering</a></li>
+            <li><a href="#">Design &amp; Research</a></li>
+            <li><a href="#">Media Production</a></li>
+            <li><a href="#">EAA Checker</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About alm</a></li>
+            <li><a href="#">Perspectives</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal">© 2026 alm engineering GmbH · Engineered in Europe. For Europe.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Imprint</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Nav: add 'scrolled' class on scroll ─────────────────── */
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── Reveal on scroll ────────────────────────────────────── */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    /* ── Waveform generator ──────────────────────────────────── */
+    const waveform = document.getElementById('waveform');
+    if (waveform) {
+      const barCount = 64;
+      for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        const h = 8 + Math.random() * 72;
+        bar.style.setProperty('--h', h + 'px');
+        bar.style.animationDelay = (Math.random() * 1.8) + 's';
+        bar.style.animationDuration = (1.4 + Math.random() * 0.8) + 's';
+        waveform.appendChild(bar);
+      }
+    }
+
+    /* ── Data nodes (Roche visual) ───────────────────────────── */
+    const dataNodes = document.getElementById('dataNodes');
+    if (dataNodes) {
+      const nodePositions = [
+        [20,20],[35,60],[55,35],[70,70],[80,25],[50,80],
+        [25,75],[65,50],[40,45],[75,55],[30,40],[60,25],
+        [15,50],[85,70],[45,65]
+      ];
+      nodePositions.forEach(([x, y]) => {
+        const node = document.createElement('div');
+        node.className = 'node';
+        node.style.left = x + '%';
+        node.style.top = y + '%';
+        dataNodes.appendChild(node);
+      });
+
+      // Draw connecting lines as SVG
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none');
+      const connections = [[0,1],[1,2],[2,3],[3,4],[0,6],[6,9],[9,5],[5,3],[2,8],[8,7],[7,4],[10,1],[10,13],[13,11],[11,2]];
+      connections.forEach(([a, b]) => {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', nodePositions[a][0] + '%');
+        line.setAttribute('y1', nodePositions[a][1] + '%');
+        line.setAttribute('x2', nodePositions[b][0] + '%');
+        line.setAttribute('y2', nodePositions[b][1] + '%');
+        line.setAttribute('stroke', 'rgba(255,255,255,0.07)');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+      });
+      dataNodes.appendChild(svg);
+    }
+
+    /* ── Hero entrance animation ─────────────────────────────── */
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      el.classList.add('visible');
+    });
+  </script>
+</body>
+</html>
