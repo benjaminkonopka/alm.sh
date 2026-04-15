@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perspectives — alm engineering</title>
+  <meta name="description" content="Deep technical writing on AI engineering, DSGVO compliance, European cloud infrastructure, and enterprise software from the alm team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:            #09090b;
+      --bg-2:          #111113;
+      --bg-3:          #18181b;
+      --text:          #fafafa;
+      --text-2:        #a1a1aa;
+      --text-3:        #52525b;
+      --border:        #27272a;
+      --border-subtle: #1c1c1e;
+      --white:         #ffffff;
+      --font-display:  'Space Grotesk', system-ui, sans-serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+      --ease:          cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-std:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-theme="light"] {
+      --bg:            #fafafa;
+      --bg-2:          #f0f0f2;
+      --bg-3:          #e4e4e7;
+      --text:          #09090b;
+      --text-2:        #52525b;
+      --text-3:        #a1a1aa;
+      --border:        #d4d4d8;
+      --border-subtle: #e4e4e7;
+      --white:         #09090b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.25s var(--ease-std), color 0.25s var(--ease-std);
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 64px); }
+    .label { font-family: var(--font-display); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    /* ── Nav ───────────────────────────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0; transition: background 0.4s var(--ease-std), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(9,9,11,0.92); backdrop-filter: blur(16px); border-bottom-color: var(--border-subtle); }
+    [data-theme="light"] .nav.scrolled { background: rgba(250,250,250,0.92); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-logo { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--white); flex-shrink: 0; }
+    .nav-logo span { color: var(--text-3); }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--text-2); letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; background: var(--white); color: var(--bg); font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 2px; transition: background 0.2s; flex-shrink: 0; }
+    [data-theme="light"] .nav-cta { border: 1px solid var(--border); }
+    .nav-cta:hover { background: #e4e4e7; }
+    [data-theme="light"] .nav-cta { background: var(--bg); color: #fafafa; }
+    [data-theme="light"] .nav-cta:hover { background: #27272a; }
+    .theme-toggle { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 50%; background: transparent; cursor: pointer; flex-shrink: 0; transition: border-color 0.2s, background 0.2s; color: var(--text-2); }
+    .theme-toggle:hover { border-color: var(--text-3); background: rgba(128,128,128,0.08); }
+    .theme-toggle svg { width: 15px; height: 15px; }
+
+    /* ── Hero ──────────────────────────────────────────────────────── */
+    .blog-hero {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .blog-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+    .blog-eyebrow { margin-bottom: 24px; }
+    .blog-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 0.92;
+      color: var(--white);
+    }
+    .blog-meta {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+    .blog-desc {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 48ch;
+    }
+    .blog-counts {
+      display: flex;
+      gap: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .blog-count-item { }
+    .blog-count-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .blog-count-label { font-size: 12px; font-weight: 300; color: var(--text-3); margin-top: 4px; }
+
+    /* ── Filter ────────────────────────────────────────────────────── */
+    .filter-bar {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 61px;
+      z-index: 50;
+      background: var(--bg);
+      transition: background 0.25s;
+    }
+    .filter-inner { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 7px 16px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-std);
+    }
+    .filter-btn:hover { color: var(--text-2); border-color: var(--text-3); }
+    .filter-btn.active { background: var(--white); color: var(--bg); border-color: var(--white); }
+    [data-theme="light"] .filter-btn.active { background: var(--bg); color: #fafafa; border-color: var(--bg); }
+    .filter-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--border);
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text-3);
+      margin-left: 4px;
+    }
+
+    /* ── Article grid ──────────────────────────────────────────────── */
+    .articles { padding: clamp(56px, 7vw, 96px) 0; }
+
+    /* Featured article */
+    .article-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      margin-bottom: 1px;
+    }
+    .article-featured-visual {
+      background: var(--bg-2);
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-visual-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+    }
+    [data-theme="light"] .featured-visual-grid {
+      background-image:
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(0,0,0,0.03) 39px, rgba(0,0,0,0.03) 40px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(0,0,0,0.03) 39px, rgba(0,0,0,0.03) 40px);
+    }
+    .featured-visual-mark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: clamp(80px, 14vw, 160px);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+    [data-theme="light"] .featured-visual-mark { color: rgba(0,0,0,0.04); }
+
+    .article-featured-content {
+      background: var(--bg);
+      padding: clamp(40px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .article-featured-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-3); flex-shrink: 0; }
+    .tag-text { font-family: var(--font-display); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
+    .article-featured-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .article-featured-excerpt {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 50ch;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .article-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-2);
+      flex-shrink: 0;
+    }
+    .author-name { font-family: var(--font-display); font-size: 12px; font-weight: 500; color: var(--text-2); }
+    .author-role { font-size: 11px; font-weight: 300; color: var(--text-3); margin-top: 1px; }
+    .article-dateline { font-size: 11px; font-weight: 300; color: var(--text-3); text-align: right; }
+
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      margin-bottom: 28px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .read-link:hover { color: var(--white); border-color: var(--text-2); }
+    .read-link:hover .arrow { transform: translateX(4px); }
+    .arrow { display: inline-block; transition: transform 0.2s var(--ease); }
+
+    /* Article grid rows */
+    .article-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      margin-bottom: 1px;
+    }
+    .article-grid.three-col {
+      grid-template-columns: 2fr 1fr;
+    }
+    .article-card {
+      background: var(--bg);
+      padding: clamp(32px, 3.5vw, 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+      transition: background 0.25s var(--ease);
+      cursor: pointer;
+    }
+    .article-card:hover { background: var(--bg-2); }
+    .article-card-top { flex: 1; }
+    .article-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .article-excerpt {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 46ch;
+    }
+    .article-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      margin-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+      gap: 12px;
+    }
+    .article-author-mini {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .avatar-sm {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text-2);
+      flex-shrink: 0;
+    }
+    .author-mini-name { font-size: 11px; font-weight: 400; color: var(--text-3); }
+    .article-readtime { font-size: 11px; font-weight: 300; color: var(--text-3); white-space: nowrap; }
+    .card-arrow {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .article-card:hover .card-arrow { border-color: var(--text-3); background: rgba(128,128,128,0.08); }
+    .card-arrow svg { width: 11px; height: 11px; stroke: var(--text-3); }
+
+    /* Category color accents */
+    .cat-ai       .tag-dot { background: #60a5fa; }
+    .cat-ai       .tag-text { color: #60a5fa; }
+    .cat-compliance .tag-dot { background: #f59e0b; }
+    .cat-compliance .tag-text { color: #f59e0b; }
+    .cat-infra    .tag-dot { background: #34d399; }
+    .cat-infra    .tag-text { color: #34d399; }
+    .cat-product  .tag-dot { background: #a78bfa; }
+    .cat-product  .tag-text { color: #a78bfa; }
+
+    /* ── Newsletter ────────────────────────────────────────────────── */
+    .newsletter {
+      border-top: 1px solid var(--border-subtle);
+      padding: clamp(56px, 7vw, 96px) 0;
+    }
+    .newsletter-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .newsletter-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 48ch;
+    }
+    .newsletter-form { display: flex; gap: 8px; flex-wrap: wrap; }
+    .newsletter-input {
+      flex: 1;
+      min-width: 220px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      padding: 13px 18px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-input::placeholder { color: var(--text-3); }
+    .newsletter-input:focus { border-color: var(--text-3); }
+    .newsletter-btn {
+      padding: 13px 24px;
+      background: var(--white);
+      color: var(--bg);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    [data-theme="light"] .newsletter-btn { background: var(--bg); color: #fafafa; }
+    .newsletter-btn:hover { background: #d4d4d8; }
+    [data-theme="light"] .newsletter-btn:hover { background: #27272a; }
+    .newsletter-note { font-size: 11px; font-weight: 300; color: var(--text-3); margin-top: 12px; }
+
+    /* ── Footer ────────────────────────────────────────────────────── */
+    .footer { border-top: 1px solid var(--border-subtle); padding: clamp(48px, 6vw, 80px) 0 36px; background: var(--bg-2); transition: background 0.25s; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px, 4vw, 56px); margin-bottom: clamp(40px, 5vw, 56px); padding-bottom: clamp(40px, 5vw, 56px); border-bottom: 1px solid var(--border-subtle); }
+    .footer-brand-name { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--white); margin-bottom: 12px; }
+    .footer-brand-name span { color: var(--text-3); }
+    .footer-tagline { font-size: 13px; font-weight: 300; color: var(--text-3); line-height: 1.6; max-width: 36ch; }
+    .footer-col-title { font-family: var(--font-display); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+    .footer-links { display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { font-size: 13px; font-weight: 300; color: var(--text-2); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11px; font-weight: 300; color: var(--text-3); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 11px; font-weight: 300; color: var(--text-3); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--text-2); }
+
+    /* ── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .blog-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .article-featured { grid-template-columns: 1fr; }
+      .article-featured-visual { min-height: 240px; }
+      .article-grid, .article-grid.three-col { grid-template-columns: 1fr; }
+      .newsletter-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .blog-counts { flex-wrap: wrap; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">alm<span>.</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html#work">Work</a></li>
+          <li><a href="index.html#industries">Industries</a></li>
+          <li><a href="blog.html" class="active">Perspectives</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#careers">Careers</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" id="themeIcon">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <a href="index.html#contact" class="nav-cta">Let's talk →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-hero-inner">
+        <div>
+          <div class="blog-eyebrow reveal"><span class="label">Perspectives — alm engineering</span></div>
+          <h1 class="blog-title reveal reveal-delay-1">The<br>hard<br>stuff.</h1>
+        </div>
+        <div class="blog-meta reveal reveal-delay-2">
+          <p class="blog-desc">Deep technical writing on AI engineering, DSGVO compliance, European cloud infrastructure, and what it actually takes to ship software that European enterprises run on.</p>
+          <div class="blog-counts">
+            <div class="blog-count-item">
+              <div class="blog-count-num">8</div>
+              <div class="blog-count-label">Articles</div>
+            </div>
+            <div class="blog-count-item">
+              <div class="blog-count-num">4</div>
+              <div class="blog-count-label">Topics</div>
+            </div>
+            <div class="blog-count-item">
+              <div class="blog-count-num">3</div>
+              <div class="blog-count-label">Authors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <button class="filter-btn active" data-filter="all">All <span class="filter-count">8</span></button>
+        <button class="filter-btn" data-filter="ai">AI Engineering <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="compliance">Compliance <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="infra">Infrastructure <span class="filter-count">2</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Articles -->
+  <section class="articles">
+    <div class="container">
+
+      <!-- Featured: DSGVO + AI -->
+      <div class="article-featured reveal" data-categories="compliance">
+        <div class="article-featured-visual">
+          <div class="featured-visual-grid"></div>
+          <div class="featured-visual-mark">DSGVO</div>
+        </div>
+        <div class="article-featured-content">
+          <div>
+            <div class="article-featured-tag cat-compliance">
+              <div class="tag-dot"></div>
+              <span class="tag-text">Compliance · AI</span>
+            </div>
+            <h2 class="article-featured-title">DSGVO-konformes AI: Was Unternehmen 2026 wissen müssen, bevor sie deployen.</h2>
+            <p class="article-featured-excerpt">Zwischen Artikel 22, dem EU AI Act und den ersten DSGVO-Bußgeldern wegen KI-Systemen hat sich die regulatorische Landschaft für Enterprise-AI dramatisch verändert. Ein praktischer Leitfaden für Softwareteams.</p>
+            <a href="blog/dsgvo-ai-2026.html" class="read-link">Read article <span class="arrow">→</span></a>
+          </div>
+          <div class="article-meta">
+            <div class="article-author">
+              <div class="author-avatar">EP</div>
+              <div>
+                <div class="author-name">Elena Petrov</div>
+                <div class="author-role">Lead Engineer, Compliance & Security</div>
+              </div>
+            </div>
+            <div class="article-dateline">April 2026 · 11 min read</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row: AI Deployment + EU Cloud -->
+      <div class="article-grid reveal" data-categories="ai infra">
+        <a href="blog/ai-deployment-enterprise.html" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-ai">
+              <div class="tag-dot"></div>
+              <span class="tag-text">AI Engineering</span>
+            </div>
+            <div class="article-title">AI pilots don't fail on the model. They fail on deployment.</div>
+            <p class="article-excerpt">We've reviewed dozens of enterprise AI projects in the last 18 months. The pattern is always the same: the model works fine in the PoC. Then reality shows up.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">MH</div>
+              <div>
+                <div class="author-mini-name">Marcus Hoffmann</div>
+              </div>
+            </div>
+            <span class="article-readtime">March 2026 · 9 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+        <a href="blog/eu-cloud-hosting.html" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-infra">
+              <div class="tag-dot"></div>
+              <span class="tag-text">Infrastructure</span>
+            </div>
+            <div class="article-title">Warum europäische Unternehmen ihre Cloud-Strategie jetzt überdenken müssen.</div>
+            <p class="article-excerpt">Schrems II war der Anfang. Der EU AI Act ist der nächste Schritt. Data sovereignty ist kein Compliance-Checkbox mehr — es ist ein Wettbewerbsvorteil.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">JW</div>
+              <div>
+                <div class="author-mini-name">Jonas Weber</div>
+              </div>
+            </div>
+            <span class="article-readtime">March 2026 · 8 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row: 3 articles (2fr + 1fr) -->
+      <div class="article-grid three-col reveal">
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-ai">
+              <div class="tag-dot"></div>
+              <span class="tag-text">AI Engineering</span>
+            </div>
+            <div class="article-title">RAG vs. Fine-Tuning: Das richtige Werkzeug für Enterprise-AI — und warum die Frage meist falsch gestellt wird.</div>
+            <p class="article-excerpt">Die meisten Diskussionen über RAG vs. Fine-Tuning verfehlen den eigentlichen Punkt. Es geht nicht um die Technologie. Es geht um die Frage, welche Daten zur Inferenzzeit verfügbar sein müssen — und welche Compliance-Regeln dafür gelten.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">MH</div>
+              <div><div class="author-mini-name">Marcus Hoffmann</div></div>
+            </div>
+            <span class="article-readtime">Feb 2026 · 12 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-compliance">
+              <div class="tag-dot"></div>
+              <span class="tag-text">Compliance · EAA</span>
+            </div>
+            <div class="article-title">The hidden cost of non-compliance under the European Accessibility Act.</div>
+            <p class="article-excerpt">The EAA came into force in June 2025. Enforcement starts in 2026. Most enterprise web applications are not ready — and the consequences extend beyond fines.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">SL</div>
+              <div><div class="author-mini-name">Sarah Lindner</div></div>
+            </div>
+            <span class="article-readtime">Jan 2026 · 7 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row: 2 articles -->
+      <div class="article-grid reveal">
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-compliance">
+              <div class="tag-dot"></div>
+              <span class="tag-text">Compliance · AI Act</span>
+            </div>
+            <div class="article-title">Der EU AI Act: Was Entwickler und Produktteams jetzt konkret tun müssen.</div>
+            <p class="article-excerpt">Der EU AI Act ist kein abstraktes Regulierungsdokument. Er definiert Anforderungen an Dokumentation, Testing, Monitoring und Transparenz, die Softwareteams jetzt in ihre Entwicklungsprozesse einbauen müssen.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">EP</div>
+              <div><div class="author-mini-name">Elena Petrov</div></div>
+            </div>
+            <span class="article-readtime">Jan 2026 · 10 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-ai">
+              <div class="tag-dot"></div>
+              <span class="tag-text">AI Engineering · Automotive</span>
+            </div>
+            <div class="article-title">Warum europäische Automotive-Unternehmen ihren eigenen AI-Stack brauchen.</div>
+            <p class="article-excerpt">Tesla trainiert auf Petabytes eigener Daten. Die europäischen OEMs haben dieselben Daten — aber nutzen sie kaum. Das ist keine technische Frage. Es ist eine strategische.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">JW</div>
+              <div><div class="author-mini-name">Jonas Weber</div></div>
+            </div>
+            <span class="article-readtime">Dec 2025 · 8 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row: Last 2 articles -->
+      <div class="article-grid reveal">
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-infra">
+              <div class="tag-dot"></div>
+              <span class="tag-text">Infrastructure · Strategy</span>
+            </div>
+            <div class="article-title">Datensouveränität als strategischer Wettbewerbsvorteil: Was nach Schrems II wirklich zählt.</div>
+            <p class="article-excerpt">Europäische Unternehmen behandeln Data Sovereignty noch immer als Compliance-Pflicht. Die klügsten behandeln sie als Produktmerkmal. Der Unterschied ist enorm.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">EP</div>
+              <div><div class="author-mini-name">Elena Petrov</div></div>
+            </div>
+            <span class="article-readtime">Nov 2025 · 9 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+        <a href="#" class="article-card" style="text-decoration:none">
+          <div class="article-card-top">
+            <div class="article-tag cat-ai">
+              <div class="tag-dot"></div>
+              <span class="tag-text">AI Engineering · LLM</span>
+            </div>
+            <div class="article-title">LLM-Observability in Produktion: Warum klassisches API-Monitoring nicht reicht.</div>
+            <p class="article-excerpt">Wenn ein REST-Endpoint schlechte Ergebnisse liefert, sieht man es sofort im Error-Log. Wenn ein LLM schlechte Antworten liefert, sieht man es erst, wenn es zu spät ist — es sei denn, man baut das richtige Monitoring.</p>
+          </div>
+          <div class="article-card-bottom">
+            <div class="article-author-mini">
+              <div class="avatar-sm">MH</div>
+              <div><div class="author-mini-name">Marcus Hoffmann</div></div>
+            </div>
+            <span class="article-readtime">Oct 2025 · 11 min</span>
+            <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="reveal">
+          <h2 class="newsletter-title">Deep reads, no noise.</h2>
+          <p class="newsletter-sub">We publish when we have something worth saying. New articles on AI engineering, European compliance, and enterprise infrastructure — to your inbox.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="your@company.com">
+            <button class="newsletter-btn">Subscribe →</button>
+          </div>
+          <p class="newsletter-note">No frequency commitment. Unsubscribe anytime. DSGVO-konform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">alm<span>.</span></div>
+          <p class="footer-tagline">The engineering partner Europe's enterprises build with. Independent. Munich-born.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Work</div>
+          <ul class="footer-links">
+            <li><a href="index.html#industries">Automotive</a></li>
+            <li><a href="index.html#industries">Media</a></li>
+            <li><a href="index.html#industries">Pharma</a></li>
+            <li><a href="index.html#industries">Insurance</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Topics</div>
+          <ul class="footer-links">
+            <li><a href="#">AI Engineering</a></li>
+            <li><a href="#">Compliance</a></li>
+            <li><a href="#">Infrastructure</a></li>
+            <li><a href="#">Product</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About alm</a></li>
+            <li><a href="index.html#careers">Careers</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal">© 2026 alm engineering GmbH · Engineered in Europe. For Europe.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Imprint</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => { obs.observe(el); });
+
+    // Theme
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const moon = `<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>`;
+    const sun  = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+    function setTheme(t) { html.setAttribute('data-theme', t); icon.innerHTML = t === 'dark' ? moon : sun; localStorage.setItem('alm-theme', t); }
+    btn.addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    setTheme(localStorage.getItem('alm-theme') || 'dark');
+
+    // Category filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(b => b.addEventListener('click', () => {
+      filterBtns.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const filter = b.getAttribute('data-filter');
+      document.querySelectorAll('[data-categories]').forEach(el => {
+        const cats = el.getAttribute('data-categories');
+        el.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+      });
+    }));
+  </script>
+</body>
+</html>
