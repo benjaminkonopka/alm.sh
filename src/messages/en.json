@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "work": "Work",
+    "industries": "Industries",
+    "perspectives": "Perspectives",
+    "about": "About",
+    "careers": "Careers",
+    "cta": "Let's talk"
+  },
+  "hero": {
+    "eyebrow": "Digital Engineering · Munich",
+    "headline": "The engineering<br>partner <em>Europe's</em><br>enterprises<br>build with.",
+    "subline": "We ship the software, AI and digital products that European brands like Roche, BMW and ProSiebenSat.1 run their business on.",
+    "cta1": "Our work",
+    "cta2": "How we work",
+    "meta1": "Munich",
+    "meta2": "Berlin",
+    "meta3": "Independent",
+    "meta4": "European by design",
+    "scroll": "Scroll"
+  },
+  "proof": {
+    "kicker": "Trusted by Europe's most demanding brands",
+    "stat1": "Years engineering<br>European enterprises",
+    "stat2": "Shipped products<br>in production",
+    "stat3": "European markets<br>served",
+    "stat4": "Engineers, designers<br>and AI specialists"
+  },
+  "cases": {
+    "title": "Selected work.",
+    "link": "All case studies",
+    "c1": {
+      "num": "01 / 03",
+      "client": "Built with BMW",
+      "headline": "We engineered the EV charging experience for 2.4M+ European drivers.",
+      "body": "In partnership with BMW's digital unit, alm delivered a unified charging and payment flow that replaced three legacy systems across 8 European markets.",
+      "m1l": "Active users",
+      "m2l": "Support tickets",
+      "m3l": "Markets launched",
+      "link": "Read the story"
+    },
+    "c2": {
+      "num": "02 / 03",
+      "client": "Built with ProSiebenSat.1",
+      "headline": "We rebuilt the streaming infrastructure that 12M+ Europeans rely on monthly.",
+      "body": "A complete re-engineering of the content delivery platform — from monolith to event-driven architecture — handling peak loads across five broadcasting brands simultaneously.",
+      "m1l": "Monthly active users",
+      "m2l": "Uptime achieved",
+      "m3l": "Brands migrated",
+      "link": "Read the story"
+    },
+    "c3": {
+      "num": "03 / 03",
+      "client": "Built with Roche",
+      "headline": "We shipped the clinical data platform 4,000+ researchers depend on.",
+      "body": "A regulated, IEC 62304-compliant platform for clinical data management — engineered to meet the strictest EU MDR requirements while remaining fast enough for daily research workflows.",
+      "m1l": "Active researchers",
+      "m2l": "Compliant",
+      "m3l": "Data retrieval time",
+      "link": "Read the story"
+    }
+  },
+  "industries": {
+    "title": "Industry practices.",
+    "link": "All industries",
+    "i1": { "name": "Automotive<br>& Mobility", "desc": "Connected vehicles, EV charging, fleet management, and in-car digital experiences for Europe's automotive leaders.", "client": "Recent: BMW" },
+    "i2": { "name": "Media &<br>Entertainment", "desc": "Streaming platforms, content ops, and audience technology at broadcast scale.", "client": "Recent: ProSiebenSat.1" },
+    "i3": { "name": "Pharma &<br>Life Sciences", "desc": "Regulated software, clinical tools, and patient-facing platforms under EU MDR and IEC 62304.", "client": "Recent: Roche" },
+    "i4": { "name": "Insurance &<br>Financial Services", "desc": "Digital claims, broker platforms, compliance tooling, and customer portals at enterprise scale.", "client": "Recent: Allianz" },
+    "i5": { "name": "Retail &<br>Commerce", "desc": "Store technology, loyalty platforms, omnichannel commerce, and POS integrations.", "client": "Recent: MediaMarkt" },
+    "i6": { "name": "Classifieds &<br>Marketplaces", "desc": "Platform engineering, trust and safety, search infrastructure, and growth tooling for marketplace leaders.", "client": "Recent: Scout24" }
+  },
+  "capabilities": {
+    "title": "Capabilities.",
+    "c1": { "name": "Digital Products", "desc": "Scalable, secure web and mobile applications engineered for European enterprise requirements — from MVP to mission-critical production." },
+    "c2": { "name": "AI Engineering", "desc": "Custom LLM integrations, RAG architectures, and intelligent agents that ship into regulated production environments — not just PoCs." },
+    "c3": { "name": "Design & Research", "desc": "User research, UX strategy, and systems-level UI design that serves both end users and enterprise governance requirements." },
+    "c4": { "name": "Media Production", "desc": "Video, podcasts, and content for enterprise brands — produced to broadcast quality, distributed for digital-first audiences." }
+  },
+  "eaa": {
+    "label": "An alm initiative",
+    "title": "The EAA Compliance Checker.",
+    "body": "The European Accessibility Act came into force in June 2025. We built a free tool that helps European companies assess where they stand — and what it takes to get compliant before enforcement begins.",
+    "statLabel": "companies have checked<br>their compliance so far",
+    "cta1": "Try the tool",
+    "cta2": "Read the report",
+    "barLabel": "EAA Compliance Score",
+    "barOverall": "Overall · Partial Compliance"
+  },
+  "perspectives": {
+    "title": "Perspectives.",
+    "link": "All articles",
+    "p1": { "tag": "Engineering · AI", "title": "Why European automotive needs its own AI stack — and why importing one from Silicon Valley won't work.", "date": "March 2026" },
+    "p2": { "tag": "Product", "title": "AI pilots don't fail on the model. They fail on deployment.", "date": "February 2026" },
+    "p3": { "tag": "Compliance · EAA", "title": "The hidden cost of non-compliance under the EAA — and who is most exposed.", "date": "January 2026" }
+  },
+  "about": {
+    "title": "An independent engineering firm.<br>Headquartered in Munich.",
+    "body": "alm is not a creative agency. We are an engineering partner — independent from holdings, embedded in European enterprise reality, and accountable to outcomes that ship into production and stay there.",
+    "badge": "Independent · No holding, no compromise",
+    "s1": "Year founded,<br>Munich",
+    "s2": "Engineers, designers<br>& AI specialists",
+    "s3": "Products shipped<br>into production",
+    "s4": "European markets<br>served"
+  },
+  "careers": {
+    "title": "Open positions.",
+    "sub": "We're growing our engineering, design,<br>and AI teams. Munich, Berlin, and remote.",
+    "r1": { "name": "Senior Backend Engineer", "meta": "Munich · Full-time", "tag": "Engineering" },
+    "r2": { "name": "AI/ML Engineer", "meta": "Munich / Remote · Full-time", "tag": "AI" },
+    "r3": { "name": "Senior UX Designer", "meta": "Munich · Full-time", "tag": "Design" },
+    "r4": { "name": "Engineering Lead", "meta": "Munich · Full-time", "tag": "Leadership" },
+    "allRoles": "All 8 open roles"
+  },
+  "footer": {
+    "tagline": "The engineering partner Europe's enterprises build with. Independent. Munich-born. European by design.",
+    "address": "alm engineering GmbH<br>Munich, Germany",
+    "col1": "Work",
+    "col2": "Services",
+    "col3": "Company",
+    "links1": ["Automotive & Mobility", "Media & Entertainment", "Pharma & Life Sciences", "Insurance & Finance", "Retail & Commerce", "Classifieds & Marketplaces"],
+    "links2": ["Digital Products", "AI Engineering", "Design & Research", "Media Production", "EAA Checker"],
+    "links3": ["About alm", "Perspectives", "Careers", "Press", "GitHub", "LinkedIn"],
+    "legal": "© 2026 alm engineering GmbH · Engineered in Europe. For Europe.",
+    "imprint": "Imprint",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "blog": {
+    "eyebrow": "Perspectives — alm engineering",
+    "title": "The<br>hard<br>stuff.",
+    "desc": "Deep technical writing on AI engineering, DSGVO compliance, European cloud infrastructure, and what it actually takes to ship software that European enterprises run on.",
+    "countL1": "Articles",
+    "countL2": "Topics",
+    "countL3": "Authors",
+    "filterAll": "All",
+    "filterAI": "AI Engineering",
+    "filterCompliance": "Compliance",
+    "filterInfra": "Infrastructure",
+    "featured": {
+      "tag": "Compliance · AI",
+      "title": "DSGVO-compliant AI: What companies need to know in 2026 before going to production.",
+      "excerpt": "Between Article 22, the EU AI Act, and the first GDPR fines for AI systems, the regulatory landscape for enterprise AI has changed dramatically. A practical guide for software teams.",
+      "date": "April 2026 · 11 min read",
+      "link": "Read article"
+    },
+    "newsletter": {
+      "title": "Deep reads, no noise.",
+      "sub": "We publish when we have something worth saying. New articles on AI engineering, European compliance, and enterprise infrastructure — to your inbox.",
+      "placeholder": "your@company.com",
+      "btn": "Subscribe",
+      "note": "No frequency commitment. Unsubscribe anytime. DSGVO-compliant."
+    }
+  },
+  "article": {
+    "back": "← All perspectives",
+    "related": "Further reading",
+    "cta": "Start a conversation →"
+  }
+}

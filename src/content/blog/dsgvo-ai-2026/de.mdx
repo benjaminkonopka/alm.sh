@@ -1,0 +1,48 @@
+## Die regulatorische Landschaft hat sich verändert.
+
+Als die DSGVO 2016 verfasst wurde, enthielt sie keine spezifische Erwähnung künstlicher Intelligenz. Artikel 22 — das Recht, keiner ausschließlich automatisierten Entscheidung unterworfen zu werden — wurde mit Blick auf Credit-Scoring und Fraud-Detection geschrieben, nicht auf generative KI. Acht Jahre später ist genau dieser Artikel die meistzitierte Rechtsgrundlage in europäischen KI-Risikoanalysen.
+
+Zwischen **Artikel 22**, dem **EU AI Act** und den **ersten DSGVO-Bußgeldern** gegen Unternehmen, die KI-Systeme einsetzen, ist der regulatorische Rahmen sowohl dichter als auch folgenreicher geworden. Dies ist ein praktischer Leitfaden für Softwareteams, die in diesem Rahmen arbeiten.
+
+## 1. Artikel 22: Automatisierte Entscheidungen und das Recht auf menschliche Überprüfung
+
+Artikel 22 besagt, dass betroffene Personen das Recht haben, keiner Entscheidung unterworfen zu werden, die ausschließlich auf einer automatisierten Verarbeitung beruht und rechtliche oder erheblich beeinträchtigende Wirkung entfaltet. 2024 war das für die meisten KI-Deployments eine theoretische Sorge. 2026 ist es ein Design-Constraint.
+
+Drei Dinge haben sich verändert:
+
+1. **Der Anwendungsbereich wurde erweitert.** Aufsichtsbehörden fassen "erheblich beeinträchtigend" jetzt so weit, dass Content-Moderation, Kreditpreisvorschläge, Recruiting-Filter und Versicherungsangebote darunter fallen — selbst wenn ein Mensch das Ergebnis formell abzeichnet.
+
+2. **Die Beweislast hat sich verschoben.** Unternehmen müssen heute nachweisen, dass die menschliche Überprüfung substanziell und nicht nur ein Abnicken ist. "Wir hatten immer einen Menschen im Loop" reicht nicht mehr, wenn dieser Mensch 400 Fälle pro Stunde prüft.
+
+3. **Bußgelder werden verhängt.** Die erste siebenstellige DSGVO-Strafe für ein KI-System wurde Ende 2025 gegen die Credit-Scoring-Pipeline einer großen europäischen Bank ausgesprochen. Weitere sind gefolgt.
+
+## 2. Datensparsamkeit in einer LLM-Welt
+
+Das DSGVO-Prinzip der **Datensparsamkeit** steht grundlegend im Widerspruch dazu, wie die meisten LLMs trainiert und betrieben werden. Modelle nehmen jeden Kontext auf, den man ihnen gibt. Betreiber schicken oft vollständige Kundendatensätze, ganze Chat-Verläufe und unzensierte Dokumente "zur Sicherheit" an Inference-Endpunkte.
+
+Das ist heute ein Compliance-Risiko, nicht mehr nur architektonische Ineffizienz. Ihre produktive KI-Pipeline braucht:
+
+- **Feldlevel-Redaction** bevor Daten einen Model-Endpunkt erreichen.
+- **Retention-Policies**, die für Eingaben und Inference-Logs gleichermaßen gelten.
+- **Dokumentation**, welche Datentypen jedes Modell verarbeitet und warum.
+
+## 3. Das Recht auf Löschung trifft auf die Vektor-Datenbank
+
+Ein Nutzer beruft sich auf sein Recht auf Löschung nach Artikel 17. CRM, Datenbanken und Backups haben alle etablierte Löschprozesse. Aber die Daten des Nutzers wurden letzten Dienstag auch in einen Retrieval-Index aufgenommen. Und sie sind in Vektor-Chunks über drei Umgebungen verteilt. Und das produktive RAG-System liefert sie weiterhin als Kontext aus.
+
+Teams, die 2023 RAG-Systeme gebaut haben, ohne darüber nachzudenken, erleben gerade, wie teuer rückwirkende Index-Hygiene ist. Die Lösung ist nicht kompliziert — aber sie muss von Anfang an mitgedacht werden:
+
+- **Source-of-Truth-Pointer** in jedem Vektor-Eintrag.
+- **Tombstoning + geplante Rebuilds**, wenn Upstream-Daten gelöscht werden.
+- **Audit-Trails**, die Inference-Outputs auf die Quelldokumente zurückführen.
+
+## Was konkret zu tun ist
+
+Wenn Ihr Team 2026 KI-Systeme deployed, ist die Checkliste einfach zu beschreiben und schwer umzusetzen:
+
+1. Kartografieren Sie jede automatisierte Entscheidung Ihrer Systeme. Klassifizieren Sie sie nach Artikel 22.
+2. Bauen Sie Datensparsamkeit in Ihre Prompt-Pipelines ein. Redigieren Sie vor, nicht nach dem Request.
+3. Behandeln Sie Vektor-Stores als erstrangige personenbezogene Datensysteme unter DSGVO.
+4. Dokumentieren Sie alles. Was nicht in der Model Card steht, existiert nicht.
+
+Nichts davon verhindert, dass Sie KI ausliefern. Es verhindert, dass Sie KI ausliefern, deren Risiko Sie nicht messen können.

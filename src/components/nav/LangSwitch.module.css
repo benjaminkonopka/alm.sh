@@ -1,0 +1,39 @@
+.wrap {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 7px 11px;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:last-child {
+  border-right: none;
+}
+
+.btn.active {
+  background: var(--white);
+  color: var(--bg);
+}
+
+.btn:hover:not(.active) {
+  color: var(--text-2);
+}
+
+:global([data-theme="light"]) .btn.active {
+  background: var(--bg);
+  color: #fafafa;
+}

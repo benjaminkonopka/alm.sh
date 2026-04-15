@@ -1,0 +1,48 @@
+## The regulatory landscape has shifted.
+
+When DSGVO was drafted in 2016, it made no specific mention of artificial intelligence. Article 22 — the right not to be subject to automated decision-making — was written with credit-scoring and fraud detection systems in mind, not generative AI. Eight years later, that same article is the single most cited legal provision in European AI risk assessments.
+
+Between **Article 22**, the **EU AI Act**, and the **first DSGVO fines** levied against companies using AI systems, the regulatory framework has become both denser and more consequential. This is a practical guide for software teams operating in that framework.
+
+## 1. Article 22: automated decisions and the right to human review
+
+Article 22 states that data subjects have the right not to be subject to decisions based solely on automated processing that produce legal or similarly significant effects. In 2024, this was a theoretical concern for most AI deployments. In 2026, it is a design constraint.
+
+Three things have changed:
+
+1. **Scope has expanded.** Regulators now interpret "similarly significant" to include content moderation decisions, loan pricing suggestions, recruitment filters, and insurance quote generation — even when a human formally approves the output.
+
+2. **Burden of proof has shifted.** Companies must now demonstrate that human review is meaningful, not rubber-stamping. "We always had a human in the loop" is no longer sufficient if that human reviews 400 cases per hour.
+
+3. **Fines are being issued.** The first seven-figure DSGVO penalty for an AI system was handed down in late 2025 against a large European bank's credit-scoring pipeline. More have followed.
+
+## 2. Data minimization in an LLM world
+
+The DSGVO principle of **Datensparsamkeit** — data minimization — is fundamentally at odds with how most LLMs are trained and operated. Models ingest whatever context you give them. Operators often send full customer records, entire chat histories, and unredacted documents to inference endpoints "just in case."
+
+This is now a compliance liability, not just an architectural inefficiency. Your production AI pipeline needs:
+
+- **Field-level redaction** before any data touches a model endpoint.
+- **Retention policies** that apply to both inputs and inference logs.
+- **Documentation** of what data types each model processes and why.
+
+## 3. The right to erasure meets the vector database
+
+A user exercises their Article 17 right to be forgotten. Your CRM, databases, and backups all have well-understood deletion procedures. But the user's data was also used to build a retrieval index last Tuesday. And it's embedded in vector chunks across three environments. And the production RAG system is still returning it as context.
+
+Teams that built RAG systems in 2023 without thinking about this are now discovering how expensive retroactive indexing hygiene is. The fix isn't complicated, but it must be designed in from the start:
+
+- **Source-of-truth pointers** in every vector entry.
+- **Tombstoning + scheduled rebuilds** when upstream records are deleted.
+- **Audit trails** linking inference outputs back to the source documents that produced them.
+
+## What to actually do
+
+If your team is deploying AI systems in 2026, the checklist is simple to describe and hard to execute:
+
+1. Map every automated decision your systems make. Classify each against Article 22.
+2. Build data minimization into your prompt pipelines. Redact before, not after.
+3. Treat vector stores as first-class personal-data systems under DSGVO.
+4. Document everything. If it's not in the model card, it doesn't exist.
+
+None of this prevents you from shipping AI. It prevents you from shipping AI that carries tail risk you can't measure.

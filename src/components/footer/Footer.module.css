@@ -1,0 +1,117 @@
+.footer {
+  border-top: 1px solid var(--border);
+  padding: clamp(64px, 8vw, 112px) 0 48px;
+  background: var(--bg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
+  margin-bottom: clamp(56px, 7vw, 96px);
+}
+
+.brandCol {
+  max-width: 340px;
+}
+
+.logo {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.logo span {
+  color: var(--text-3);
+}
+
+.tagline {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 24px;
+}
+
+.address {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  line-height: 1.7;
+}
+
+.colTitle {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 24px;
+}
+
+.col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.col a {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-2);
+  transition: color 0.2s;
+}
+
+.col a:hover {
+  color: var(--text);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.legal {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.legalLinks a {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-3);
+  transition: color 0.2s;
+}
+
+.legalLinks a:hover {
+  color: var(--text-2);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .brandCol {
+    grid-column: 1 / -1;
+    max-width: 460px;
+  }
+}

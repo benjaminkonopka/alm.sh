@@ -1,0 +1,45 @@
+## The PoC always works.
+
+We've reviewed dozens of enterprise AI projects in the last 18 months, from conversational agents at European banks to predictive maintenance systems at automotive OEMs. The pattern is almost always the same: the model works fine in the proof-of-concept, the executive sponsor is excited, the pilot is greenlit. Then reality shows up.
+
+The failure mode is rarely the model itself. It is **everything around the model** — the data pipelines, the monitoring, the governance, the integration with legacy systems, the operational handoffs. We see the same seven failure modes again and again.
+
+## 1. No production dataset
+
+The PoC was built on a hand-curated sample. The production system has to handle whatever flows through the upstream pipeline — including the malformed, the stale, and the adversarial. Teams are consistently surprised by the drop in quality once they connect to real data streams.
+
+## 2. No shadow deployment
+
+The first time real users interact with the model is the first time anyone sees how it actually behaves under load. No A/B testing, no shadow scoring, no canary rollout. When something goes wrong — and it always does — there is no way to roll back without losing a day of operations.
+
+## 3. Monitoring designed for APIs, not models
+
+The ops team has dashboards for latency, error rates, and throughput. None of that tells you whether the model is still producing the right answers. When a model silently drifts, you find out from an angry customer six weeks later.
+
+## 4. No governance story
+
+The security review surfaces questions that nobody can answer. What data does the model see? Where does it live? Who audited the training set? Can we explain a specific output to a regulator? The project stalls for three months while compliance and engineering hash out a narrative.
+
+## 5. The demo tech stack doesn't scale
+
+Langchain in a notebook works great for five users. In production, the same pipeline falls over at 50 concurrent requests. The team has to rewrite the serving layer, which takes longer than the original PoC.
+
+## 6. No human handoff design
+
+The model generates suggestions. A human is supposed to review them. But the UI was an afterthought, the reviewers are overloaded, and the feedback loop that was supposed to improve the model over time never gets built.
+
+## 7. No retraining plan
+
+Six months in, the model's performance degrades. Nobody on the team is sure how to retrain it without starting over. The original data scientist has moved on. The retraining pipeline was never documented.
+
+## What works instead
+
+The teams that ship AI into production successfully all do the same things:
+
+- They build the **monitoring story first**, not last. Model-specific metrics are non-negotiable.
+- They **integrate with production data early**, even if the model is bad at first.
+- They design the **human interface** as carefully as the model itself.
+- They plan for **retraining and rollback** before the first deployment.
+- They treat **governance as product**, not as a review stage.
+
+The model is the smallest part of the system. The organizations that understand this ship AI. The ones that don't keep doing PoCs.

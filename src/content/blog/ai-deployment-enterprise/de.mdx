@@ -1,0 +1,45 @@
+## Der PoC funktioniert immer.
+
+Wir haben in den letzten 18 Monaten Dutzende Enterprise-KI-Projekte begleitet — von Conversational Agents bei europäischen Banken bis zu Predictive-Maintenance-Systemen bei Automobilherstellern. Das Muster ist fast immer dasselbe: Das Modell funktioniert im Proof-of-Concept, der Executive Sponsor ist begeistert, der Pilot wird freigegeben. Dann kommt die Realität.
+
+Das Versagen liegt selten am Modell. Es liegt an **allem drumherum** — den Datenpipelines, dem Monitoring, der Governance, der Integration in Legacy-Systeme, den operativen Übergaben. Wir sehen immer wieder dieselben sieben Fehlermodi.
+
+## 1. Kein Production-Datensatz
+
+Der PoC wurde auf einem handverlesenen Sample gebaut. Das Produktivsystem muss mit allem umgehen, was durch die Upstream-Pipeline fließt — inklusive der fehlerhaften, veralteten und adversarialen Daten. Teams sind immer wieder überrascht, wie stark die Qualität einbricht, sobald sie an echte Datenströme angeschlossen werden.
+
+## 2. Kein Shadow Deployment
+
+Das erste Mal, dass echte Nutzer mit dem Modell interagieren, ist auch das erste Mal, dass jemand sieht, wie es sich unter Last tatsächlich verhält. Kein A/B-Testing, kein Shadow Scoring, kein Canary-Rollout. Wenn etwas schiefgeht — und das passiert immer — gibt es keine Möglichkeit zurückzurollen, ohne einen Tag Betrieb zu verlieren.
+
+## 3. Monitoring für APIs statt für Modelle
+
+Das Ops-Team hat Dashboards für Latency, Error-Rates und Throughput. Nichts davon sagt aus, ob das Modell noch die richtigen Antworten liefert. Wenn ein Modell stillschweigend driftet, erfährt man es sechs Wochen später von einem verärgerten Kunden.
+
+## 4. Keine Governance-Story
+
+Das Security-Review wirft Fragen auf, die niemand beantworten kann. Welche Daten sieht das Modell? Wo leben sie? Wer hat den Trainingsdatensatz geprüft? Können wir einem Regulator einen konkreten Output erklären? Das Projekt stagniert drei Monate, während Compliance und Engineering sich auf eine Darstellung einigen.
+
+## 5. Der Demo-Stack skaliert nicht
+
+Langchain in einem Notebook funktioniert für fünf Nutzer gut. In Produktion kippt dieselbe Pipeline bei 50 gleichzeitigen Requests. Das Team muss die Serving-Schicht neu schreiben, was länger dauert als der ursprüngliche PoC.
+
+## 6. Kein Design für die menschliche Übergabe
+
+Das Modell erzeugt Vorschläge. Ein Mensch soll sie prüfen. Aber die UI war ein Nachgedanke, die Reviewer sind überlastet, und der Feedback-Loop, der das Modell über Zeit verbessern sollte, wird nie gebaut.
+
+## 7. Kein Retraining-Plan
+
+Sechs Monate später lässt die Modellqualität nach. Niemand im Team ist sich sicher, wie man retrainiert, ohne von vorn anzufangen. Der ursprüngliche Data Scientist ist weg. Die Retraining-Pipeline war nie dokumentiert.
+
+## Was stattdessen funktioniert
+
+Die Teams, die KI erfolgreich in Produktion bringen, machen alle dasselbe:
+
+- Sie bauen die **Monitoring-Story zuerst**, nicht zuletzt. Modellspezifische Metriken sind nicht verhandelbar.
+- Sie **integrieren früh mit Produktivdaten**, auch wenn das Modell zunächst schlecht abschneidet.
+- Sie designen das **menschliche Interface** so sorgfältig wie das Modell selbst.
+- Sie planen **Retraining und Rollback**, bevor das erste Deployment stattfindet.
+- Sie behandeln **Governance als Produkt**, nicht als Review-Phase.
+
+Das Modell ist der kleinste Teil des Systems. Organisationen, die das verstehen, liefern KI aus. Die anderen bleiben in PoC-Schleifen stecken.

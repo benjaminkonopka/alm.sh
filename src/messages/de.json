@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "work": "Projekte",
+    "industries": "Branchen",
+    "perspectives": "Perspektiven",
+    "about": "Über uns",
+    "careers": "Karriere",
+    "cta": "Kontakt"
+  },
+  "hero": {
+    "eyebrow": "Digital Engineering · München",
+    "headline": "Der Engineering-<br>Partner, mit dem<br><em>Europas</em><br>Unternehmen bauen.",
+    "subline": "Wir liefern die Software, KI-Systeme und digitalen Produkte, auf denen europäische Marken wie Roche, BMW und ProSiebenSat.1 ihr Geschäft aufbauen.",
+    "cta1": "Unsere Projekte",
+    "cta2": "Wie wir arbeiten",
+    "meta1": "München",
+    "meta2": "Berlin",
+    "meta3": "Unabhängig",
+    "meta4": "Europäisch durch Prinzip",
+    "scroll": "Scrollen"
+  },
+  "proof": {
+    "kicker": "Das Vertrauen der anspruchsvollsten Marken Europas",
+    "stat1": "Jahre Engineering für<br>europäische Unternehmen",
+    "stat2": "Produkte erfolgreich<br>in Produktion gebracht",
+    "stat3": "Europäische Märkte<br>betreut",
+    "stat4": "Engineers, Designer<br>und KI-Spezialisten"
+  },
+  "cases": {
+    "title": "Ausgewählte Projekte.",
+    "link": "Alle Case Studies",
+    "c1": {
+      "num": "01 / 03",
+      "client": "Mit BMW gebaut",
+      "headline": "Wir haben die EV-Ladeerfahrung für 2,4 Mio.+ europäische Fahrer entwickelt.",
+      "body": "In Partnerschaft mit der Digitaleinheit von BMW lieferte alm einen einheitlichen Lade- und Zahlungsflow, der drei Legacy-Systeme in 8 europäischen Märkten ablöste.",
+      "m1l": "Aktive Nutzer",
+      "m2l": "Weniger Support-Tickets",
+      "m3l": "Märkte gelauncht",
+      "link": "Case Study lesen"
+    },
+    "c2": {
+      "num": "02 / 03",
+      "client": "Mit ProSiebenSat.1 gebaut",
+      "headline": "Wir haben die Streaming-Infrastruktur neu aufgebaut, auf die monatlich 12 Mio.+ Europäer setzen.",
+      "body": "Ein vollständiges Re-Engineering der Content-Delivery-Plattform — von Monolith zu event-getriebener Architektur — mit gleichzeitiger Peak-Last für fünf Broadcasting-Marken.",
+      "m1l": "Monatlich aktive Nutzer",
+      "m2l": "Uptime erreicht",
+      "m3l": "Marken migriert",
+      "link": "Case Study lesen"
+    },
+    "c3": {
+      "num": "03 / 03",
+      "client": "Mit Roche gebaut",
+      "headline": "Wir haben die klinische Datenplattform geliefert, auf die 4.000+ Forscher täglich angewiesen sind.",
+      "body": "Eine regulierte, IEC-62304-konforme Plattform für das klinische Datenmanagement — entwickelt für die strengsten EU-MDR-Anforderungen, dabei schnell genug für den täglichen Forschungsalltag.",
+      "m1l": "Aktive Forscher",
+      "m2l": "EU MDR-konform",
+      "m3l": "Schnellere Datenabrufe",
+      "link": "Case Study lesen"
+    }
+  },
+  "industries": {
+    "title": "Branchen-Expertise.",
+    "link": "Alle Branchen",
+    "i1": { "name": "Automotive<br>& Mobilität", "desc": "Connected Vehicles, EV-Laden, Flottenmanagement und In-Car-Digitalerfahrungen für Europas Automobilhersteller.", "client": "Aktuell: BMW" },
+    "i2": { "name": "Medien &<br>Entertainment", "desc": "Streaming-Plattformen, Content-Operations und Audience-Technologie in Broadcast-Qualität.", "client": "Aktuell: ProSiebenSat.1" },
+    "i3": { "name": "Pharma &<br>Life Sciences", "desc": "Regulierte Software, klinische Tools und patientenseitige Plattformen nach EU MDR und IEC 62304.", "client": "Aktuell: Roche" },
+    "i4": { "name": "Versicherung &<br>Financial Services", "desc": "Digitale Schadensmeldungen, Maklersysteme, Compliance-Tools und Kundenportale in Enterprise-Qualität.", "client": "Aktuell: Allianz" },
+    "i5": { "name": "Handel &<br>Commerce", "desc": "Store-Technologie, Loyalty-Plattformen, Omnichannel-Commerce und POS-Integrationen.", "client": "Aktuell: MediaMarkt" },
+    "i6": { "name": "Classified &<br>Marktplätze", "desc": "Platform Engineering, Trust & Safety, Such-Infrastruktur und Growth-Tools für Marktplatz-Leader.", "client": "Aktuell: Scout24" }
+  },
+  "capabilities": {
+    "title": "Leistungen.",
+    "c1": { "name": "Digitale Produkte", "desc": "Skalierbare, sichere Web- und Mobile-Anwendungen für europäische Enterprise-Anforderungen — vom MVP bis zur mission-kritischen Produktion." },
+    "c2": { "name": "KI Engineering", "desc": "Individuelle LLM-Integrationen, RAG-Architekturen und intelligente Agenten, die in regulierten Produktionsumgebungen laufen — nicht nur als PoC." },
+    "c3": { "name": "Design & Research", "desc": "User Research, UX-Strategie und systemseitiges UI-Design für Endnutzer und Enterprise-Governance-Anforderungen gleichermaßen." },
+    "c4": { "name": "Media Production", "desc": "Video, Podcasts und Content für Enterprise-Marken — in Broadcast-Qualität produziert, für digitale Kanäle distribuiert." }
+  },
+  "eaa": {
+    "label": "Eine alm-Initiative",
+    "title": "Der EAA Compliance Checker.",
+    "body": "Der European Accessibility Act trat im Juni 2025 in Kraft. Wir haben ein kostenloses Tool entwickelt, mit dem europäische Unternehmen ihren Stand prüfen — und erfahren, was für eine vollständige Konformität nötig ist.",
+    "statLabel": "Unternehmen haben ihre<br>Konformität bereits geprüft",
+    "cta1": "Tool ausprobieren",
+    "cta2": "Bericht lesen",
+    "barLabel": "EAA Compliance Score",
+    "barOverall": "Gesamt · Teilweise konform"
+  },
+  "perspectives": {
+    "title": "Perspektiven.",
+    "link": "Alle Artikel",
+    "p1": { "tag": "Engineering · KI", "title": "Warum europäische Automobilhersteller einen eigenen KI-Stack brauchen — und warum ein Import aus dem Silicon Valley nicht funktioniert.", "date": "März 2026" },
+    "p2": { "tag": "Produkt", "title": "KI-Piloten scheitern nicht am Modell. Sie scheitern beim Deployment.", "date": "Februar 2026" },
+    "p3": { "tag": "Compliance · EAA", "title": "Die versteckten Kosten der Nicht-Konformität unter dem EAA — und wer am stärksten betroffen ist.", "date": "Januar 2026" }
+  },
+  "about": {
+    "title": "Ein unabhängiges Engineering-Unternehmen.<br>Mit Sitz in München.",
+    "body": "alm ist keine Kreativagentur. Wir sind ein Engineering-Partner — unabhängig von Holdings, eingebettet in die europäische Enterprise-Realität und verantwortlich für Ergebnisse, die in die Produktion gehen und dort bleiben.",
+    "badge": "Unabhängig · Kein Konzern, kein Kompromiss",
+    "s1": "Gründungsjahr,<br>München",
+    "s2": "Engineers, Designer<br>& KI-Spezialisten",
+    "s3": "Produkte in die<br>Produktion gebracht",
+    "s4": "Europäische Märkte<br>betreut"
+  },
+  "careers": {
+    "title": "Offene Stellen.",
+    "sub": "Wir wachsen in Engineering, Design<br>und KI. München, Berlin und Remote.",
+    "r1": { "name": "Senior Backend Engineer", "meta": "München · Vollzeit", "tag": "Engineering" },
+    "r2": { "name": "KI/ML Engineer", "meta": "München / Remote · Vollzeit", "tag": "KI" },
+    "r3": { "name": "Senior UX Designer", "meta": "München · Vollzeit", "tag": "Design" },
+    "r4": { "name": "Engineering Lead", "meta": "München · Vollzeit", "tag": "Leadership" },
+    "allRoles": "Alle 8 offenen Stellen"
+  },
+  "footer": {
+    "tagline": "Der Engineering-Partner, mit dem Europas Unternehmen bauen. Unabhängig. In München gegründet. Europäisch durch Prinzip.",
+    "address": "alm engineering GmbH<br>München, Deutschland",
+    "col1": "Projekte",
+    "col2": "Leistungen",
+    "col3": "Unternehmen",
+    "links1": ["Automotive & Mobilität", "Medien & Entertainment", "Pharma & Life Sciences", "Versicherung & Finance", "Handel & Commerce", "Classified & Marktplätze"],
+    "links2": ["Digitale Produkte", "KI Engineering", "Design & Research", "Media Production", "EAA Checker"],
+    "links3": ["Über alm", "Perspektiven", "Karriere", "Presse", "GitHub", "LinkedIn"],
+    "legal": "© 2026 alm engineering GmbH · Entwickelt in Europa. Für Europa.",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
+  },
+  "blog": {
+    "eyebrow": "Perspektiven — alm engineering",
+    "title": "Das<br>Wesentliche.",
+    "desc": "Fundierte Beiträge zu KI Engineering, DSGVO-Konformität, europäischer Cloud-Infrastruktur und allem, was es wirklich braucht, um Software zu liefern, auf der europäische Unternehmen aufbauen.",
+    "countL1": "Artikel",
+    "countL2": "Themen",
+    "countL3": "Autoren",
+    "filterAll": "Alle",
+    "filterAI": "KI Engineering",
+    "filterCompliance": "Compliance",
+    "filterInfra": "Infrastruktur",
+    "featured": {
+      "tag": "Compliance · KI",
+      "title": "DSGVO-konformes KI: Was Unternehmen 2026 wissen müssen, bevor sie deployen.",
+      "excerpt": "Zwischen Artikel 22, dem EU AI Act und den ersten DSGVO-Bußgeldern wegen KI-Systemen hat sich die regulatorische Landschaft für Enterprise-KI dramatisch verändert. Ein praktischer Leitfaden für Softwareteams.",
+      "date": "April 2026 · 11 Min. Lesezeit",
+      "link": "Artikel lesen"
+    },
+    "newsletter": {
+      "title": "Substanz statt Lärm.",
+      "sub": "Wir publizieren, wenn wir etwas Relevantes zu sagen haben. Neue Artikel zu KI Engineering, europäischer Compliance und Enterprise-Infrastruktur — direkt in Ihr Postfach.",
+      "placeholder": "ihre@firma.de",
+      "btn": "Abonnieren",
+      "note": "Keine feste Frequenz. Jederzeit kündbar. DSGVO-konform."
+    }
+  },
+  "article": {
+    "back": "← Alle Perspektiven",
+    "related": "Weitere Artikel",
+    "cta": "Gespräch anfragen →"
+  }
+}
