@@ -1303,6 +1303,14 @@
     .theme-toggle:active { transform: scale(0.95); }
     .theme-toggle svg { width: 15px; height: 15px; }
 
+    /* ── Lang switch ────────────────────────────────────────────────── */
+    .lang-switch { display:flex; border:1px solid var(--border); border-radius:2px; overflow:hidden; flex-shrink:0; }
+    .lang-btn { background:transparent; border:none; border-right:1px solid var(--border); padding:7px 11px; font-family:var(--font-display); font-size:10px; font-weight:600; letter-spacing:0.1em; color:var(--text-3); cursor:pointer; transition:background 0.2s,color 0.2s; }
+    .lang-btn:last-child { border-right:none; }
+    .lang-btn.active { background:var(--white); color:var(--bg); }
+    .lang-btn:hover:not(.active) { color:var(--text-2); }
+    [data-theme="light"] .lang-btn.active { background:var(--bg); color:#fafafa; }
+
     /* ── Light theme ────────────────────────────────────────────────── */
     [data-theme="light"] {
       --bg:            #fafafa;
@@ -1466,6 +1474,10 @@
           <li><a href="#about">About</a></li>
           <li><a href="#careers">Careers</a></li>
         </ul>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" id="themeIcon">
             <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
@@ -2134,6 +2146,10 @@
     const saved = localStorage.getItem('alm-theme');
     if (saved) applyTheme(saved);
     else applyTheme('dark');
+
+    // Lang buttons (wired after lang.js loads)
+    document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => window.setLang(b.dataset.lang)));
   </script>
+  <script src="lang.js"></script>
 </body>
 </html>
