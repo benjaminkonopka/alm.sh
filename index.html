@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>alm engineering — The engineering partner Europe's enterprises build with</title>
   <meta name="description" content="We ship the software, AI and digital products that European enterprises like Roche, BMW and ProSiebenSat.1 run their business on. Independent. Munich-born.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="alm engineering — The engineering partner Europe's enterprises build with">
+  <meta property="og:description" content="We ship the software, AI and digital products that European enterprises like Roche, BMW and ProSiebenSat.1 run their business on.">
+  <meta property="og:image" content="assets/og/og-home.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="assets/og/og-home.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -292,6 +298,32 @@
       justify-content: center;
       overflow: hidden;
     }
+    /* Hero background image — sits behind geo animation */
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 1.4s ease;
+    }
+    .hero-bg-img.loaded { opacity: 0.55; }
+    [data-theme="light"] .hero-bg-img.loaded { opacity: 0.35; }
+    /* Hero video — overlays geo animation when asset exists */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      z-index: 3;
+      transition: opacity 1.2s ease;
+    }
+    .hero-video.loaded { opacity: 0.85; }
+    [data-theme="light"] .hero-video.loaded { opacity: 0.65; }
     .hero-visual {
       position: absolute;
       inset: 0;
@@ -500,8 +532,26 @@
       color: rgba(255,255,255,0.18);
       transition: color 0.3s var(--ease);
       cursor: default;
+      display: flex;
+      align-items: center;
     }
     .proof-logo:hover { color: rgba(255,255,255,0.5); }
+    .proof-logo img {
+      height: 28px;
+      width: auto;
+      max-width: 120px;
+      opacity: 0.2;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.3s var(--ease);
+      object-fit: contain;
+    }
+    .proof-logo:hover img { opacity: 0.55; }
+    .proof-logo .logo-fallback { display: none; }
+    .proof-logo img[data-failed] { display: none; }
+    .proof-logo img[data-failed] + .logo-fallback { display: block; }
+    [data-theme="light"] .proof-logo img { filter: brightness(0); }
+    [data-theme="light"] .proof-logo { color: rgba(0,0,0,0.2); }
+    [data-theme="light"] .proof-logo:hover { color: rgba(0,0,0,0.5); }
     .proof-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -622,6 +672,17 @@
       overflow: hidden;
       min-height: 320px;
     }
+    /* Real image overlay — sits above CSS visuals, below labels */
+    .case-visual picture { position: absolute; inset: 0; z-index: 1; }
+    .case-visual picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+    .case-item:hover .case-visual picture img { transform: scale(1.03); }
+    .visual-label { z-index: 2; }
     /* Visual 1 — BMW: blue-grey circuit lines */
     .cv-1 {
       background: var(--bg-2);
@@ -1520,6 +1581,16 @@
       </div>
     </div>
     <div class="hero-right">
+      <!-- Static background image (shown until/unless video loads) -->
+      <img class="hero-bg-img" src="assets/hero/hero-poster.jpg" alt=""
+           loading="eager" decoding="async"
+           onload="this.classList.add('loaded')" onerror="this.remove()">
+      <!-- Video loop (replaces bg image when available) -->
+      <video class="hero-video" autoplay muted loop playsinline
+             oncanplay="this.classList.add('loaded')" onerror="this.remove()">
+        <source src="assets/hero/hero-loop.webm" type="video/webm">
+        <source src="assets/hero/hero-loop.mp4" type="video/mp4">
+      </video>
       <div class="hero-visual">
         <div class="hero-geo">
           <div class="geo-cross">
@@ -1553,12 +1624,24 @@
         <span class="label">Trusted by Europe's most demanding brands</span>
       </div>
       <div class="proof-logos reveal reveal-delay-1">
-        <div class="proof-logo">ProSiebenSat.1</div>
-        <div class="proof-logo">Roche</div>
-        <div class="proof-logo">BMW</div>
-        <div class="proof-logo">MediaMarkt</div>
-        <div class="proof-logo">Allianz</div>
-        <div class="proof-logo">Scout24</div>
+        <div class="proof-logo">
+          <img src="assets/logos/prosiebensat1.svg" alt="ProSiebenSat.1" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">ProSiebenSat.1</span>
+        </div>
+        <div class="proof-logo">
+          <img src="assets/logos/roche.svg" alt="Roche" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">Roche</span>
+        </div>
+        <div class="proof-logo">
+          <img src="assets/logos/bmw.svg" alt="BMW" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">BMW</span>
+        </div>
+        <div class="proof-logo">
+          <img src="assets/logos/mediamarkt.svg" alt="MediaMarkt" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">MediaMarkt</span>
+        </div>
+        <div class="proof-logo">
+          <img src="assets/logos/allianz.svg" alt="Allianz" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">Allianz</span>
+        </div>
+        <div class="proof-logo">
+          <img src="assets/logos/scout24.svg" alt="Scout24" loading="lazy" onerror="this.dataset.failed='1'"><span class="logo-fallback">Scout24</span>
+        </div>
       </div>
     </div>
     <div class="proof-stats reveal">
@@ -1614,6 +1697,10 @@
         <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
       </div>
       <div class="case-visual cv-1">
+        <picture>
+          <source srcset="assets/cases/bmw.webp" type="image/webp" media="(min-width: 1px)">
+          <img src="assets/cases/bmw.webp" alt="BMW automotive platform UI" loading="lazy" onerror="this.closest('picture').remove()">
+        </picture>
         <div class="visual-float"></div>
         <div class="visual-label">Automotive · Mobility</div>
       </div>
@@ -1643,8 +1730,12 @@
         <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
       </div>
       <div class="case-visual cv-2">
+        <picture>
+          <source srcset="assets/cases/p7s1.webp" type="image/webp" media="(min-width: 1px)">
+          <img src="assets/cases/p7s1.webp" alt="ProSiebenSat.1 streaming platform" loading="lazy" onerror="this.closest('picture').remove()">
+        </picture>
         <div class="waveform" id="waveform"></div>
-        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Media · Entertainment</div>
+        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);z-index:2">Media · Entertainment</div>
       </div>
     </div>
 
@@ -1672,8 +1763,12 @@
         <a href="#" class="case-link">Read the story <span class="arrow">→</span></a>
       </div>
       <div class="case-visual cv-3">
+        <picture>
+          <source srcset="assets/cases/roche.webp" type="image/webp" media="(min-width: 1px)">
+          <img src="assets/cases/roche.webp" alt="Roche clinical data platform" loading="lazy" onerror="this.closest('picture').remove()">
+        </picture>
         <div class="data-nodes" id="dataNodes"></div>
-        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Pharma · Life Sciences</div>
+        <div class="visual-label" style="position:absolute;bottom:32px;left:32px;font-family:var(--font-display);font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);z-index:2">Pharma · Life Sciences</div>
       </div>
     </div>
   </section>

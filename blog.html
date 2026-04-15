@@ -280,7 +280,37 @@
       font-weight: 600;
       color: var(--text-2);
       flex-shrink: 0;
+      overflow: hidden;
     }
+    .author-avatar img, .avatar-sm img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    /* Featured visual image */
+    .article-featured-visual picture {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .article-featured-visual picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .featured-visual-grid, .featured-visual-mark { z-index: 2; }
+    /* Card image support */
+    .card-img {
+      position: relative;
+      overflow: hidden;
+      height: 160px;
+      background: var(--bg-3);
+      margin-bottom: 24px;
+    }
+    .card-img picture { position: absolute; inset: 0; }
+    .card-img picture img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+    .article-card:hover .card-img picture img { transform: scale(1.04); }
     .author-name { font-family: var(--font-display); font-size: 12px; font-weight: 500; color: var(--text-2); }
     .author-role { font-size: 11px; font-weight: 300; color: var(--text-3); margin-top: 1px; }
     .article-dateline { font-size: 11px; font-weight: 300; color: var(--text-3); text-align: right; }
@@ -576,6 +606,10 @@
       <!-- Featured: DSGVO + AI -->
       <div class="article-featured reveal" data-categories="compliance">
         <div class="article-featured-visual">
+          <picture>
+            <source srcset="assets/blog/dsgvo-ai.webp" type="image/webp">
+            <img src="assets/blog/dsgvo-ai.webp" alt="DSGVO AI Compliance" loading="lazy" onerror="this.closest('picture').remove()">
+          </picture>
           <div class="featured-visual-grid"></div>
           <div class="featured-visual-mark">DSGVO</div>
         </div>
@@ -591,7 +625,9 @@
           </div>
           <div class="article-meta">
             <div class="article-author">
-              <div class="author-avatar">EP</div>
+              <div class="author-avatar">
+                <img src="assets/team/elena-petrov.webp" alt="Elena Petrov" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','EP')">
+              </div>
               <div>
                 <div class="author-name">Elena Petrov</div>
                 <div class="author-role">Lead Engineer, Compliance & Security</div>
@@ -615,7 +651,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">MH</div>
+              <div class="avatar-sm"><img src="assets/team/marcus-hoffmann.webp" alt="Marcus Hoffmann" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','MH')"></div>
               <div>
                 <div class="author-mini-name">Marcus Hoffmann</div>
               </div>
@@ -635,7 +671,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">JW</div>
+              <div class="avatar-sm"><img src="assets/team/jonas-weber.webp" alt="Jonas Weber" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','JW')"></div>
               <div>
                 <div class="author-mini-name">Jonas Weber</div>
               </div>
@@ -659,7 +695,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">MH</div>
+              <div class="avatar-sm"><img src="assets/team/marcus-hoffmann.webp" alt="Marcus Hoffmann" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','MH')"></div>
               <div><div class="author-mini-name">Marcus Hoffmann</div></div>
             </div>
             <span class="article-readtime">Feb 2026 · 12 min</span>
@@ -677,7 +713,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">SL</div>
+              <div class="avatar-sm"><img src="assets/team/sarah-lindner.webp" alt="Sarah Lindner" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','SL')"></div>
               <div><div class="author-mini-name">Sarah Lindner</div></div>
             </div>
             <span class="article-readtime">Jan 2026 · 7 min</span>
@@ -699,7 +735,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">EP</div>
+              <div class="avatar-sm"><img src="assets/team/elena-petrov.webp" alt="Elena Petrov" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','EP')"></div>
               <div><div class="author-mini-name">Elena Petrov</div></div>
             </div>
             <span class="article-readtime">Jan 2026 · 10 min</span>
@@ -717,7 +753,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">JW</div>
+              <div class="avatar-sm"><img src="assets/team/jonas-weber.webp" alt="Jonas Weber" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','JW')"></div>
               <div><div class="author-mini-name">Jonas Weber</div></div>
             </div>
             <span class="article-readtime">Dec 2025 · 8 min</span>
@@ -739,7 +775,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">EP</div>
+              <div class="avatar-sm"><img src="assets/team/elena-petrov.webp" alt="Elena Petrov" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','EP')"></div>
               <div><div class="author-mini-name">Elena Petrov</div></div>
             </div>
             <span class="article-readtime">Nov 2025 · 9 min</span>
@@ -757,7 +793,7 @@
           </div>
           <div class="article-card-bottom">
             <div class="article-author-mini">
-              <div class="avatar-sm">MH</div>
+              <div class="avatar-sm"><img src="assets/team/marcus-hoffmann.webp" alt="Marcus Hoffmann" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentText('beforeend','MH')"></div>
               <div><div class="author-mini-name">Marcus Hoffmann</div></div>
             </div>
             <span class="article-readtime">Oct 2025 · 11 min</span>
