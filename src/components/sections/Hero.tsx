@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import styles from "./Hero.module.css";
@@ -42,14 +41,17 @@ export function Hero() {
       </div>
 
       <div className={styles.right}>
-        <Image
-          src="/assets/hero/hero-poster.jpg"
-          alt=""
-          fill
-          priority
-          sizes="(max-width: 900px) 100vw, 45vw"
-          className={styles.bgImg}
-        />
+        <video
+          className={styles.bgVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/assets/hero/hero-poster.jpg"
+        >
+          <source src="/assets/hero/hero-video.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div className={styles.scroll}>
