@@ -1,0 +1,39 @@
+## Nicht jede Frage verdient zehn Sekunden Nachdenken.
+
+Der Reasoning-Model-Hype-Cycle hat die Phase „überall einbauen" erreicht. Teams tauschen GPT-4o gegen o3 und Claude Opus mit Extended Thinking in jedem Use Case aus, weil mehr Nachdenken bessere Ergebnisse bedeuten muss. Die Rechnung am Monatsende erzählt eine andere Geschichte.
+
+Reasoning-Modelle kosten zwischen 10× und 50× mehr pro Token als ihre schnellen Gegenstücke. Dieses Delta ist kein Bug. Es ist der Preis einer grundlegend anderen Architektur — einer, die Compute für Deliberation allokiert, bevor eine Antwort generiert wird. Die Frage ist nicht, ob Reasoning-Modelle besser sind. Sind sie. Die Frage ist: **Besser worin, und ist das Delta für deinen spezifischen Workload den Preis wert?**
+
+## Wann sie jeden Cent wert sind
+
+**Mehrstufige Logikprobleme.** Steuerberechnungen, regulatorische Compliance-Checks, Vertragsanalysen — alles, wo ein falscher Zwischenschritt eine selbstbewusst falsche Endantwort produziert. Reasoning-Modelle fangen den Fehler bei Schritt drei ab, statt ihn bis Schritt zehn weiterzureichen.
+
+**Code-Generierung mit Constraints.** Code schreiben, der mehrere simultane Anforderungen erfüllen muss — Performance, Sicherheit, API-Kompatibilität — profitiert enorm von einem Modell, das plant, bevor es schreibt. Die Kosten eines Reasoning-Model-Calls sind trivial im Vergleich zu den Kosten, Code zu debuggen, den ein schnelles Modell subtil falsch geschrieben hat.
+
+**Uneindeutige Instruktionen.** Wenn der Input unterspezifiziert ist, identifiziert ein Reasoning-Modell die Ambiguität eher und fragt nach Klärung oder behandelt Randfälle. Ein schnelles Modell wählt eine Interpretation und rennt los, was in Ordnung ist, wenn die Stakes niedrig sind, und katastrophal, wenn nicht.
+
+**Evaluation und Ranking.** Ein Reasoning-Modell als Richter einsetzen — um Outputs günstigerer Modelle zu bewerten — ist eines der Patterns mit dem höchsten ROI in Produktions-KI. Das Reasoning-Modell sieht Nuancen, die ein schnelles Modell übersieht, und man zahlt die Prämie nur beim Evaluationsschritt, nicht bei jeder Generation.
+
+## Wann sie Geld verbrennen
+
+**Hochvolumige, Low-Stakes-Generierung.** Produktbeschreibungen, Social-Media-Varianten, E-Mail-Betreffzeilen. Der Output-Qualitätsunterschied zwischen einem Reasoning-Modell und einem schnellen Modell ist für den Endnutzer nicht wahrnehmbar, aber der Kostenunterschied ist 20×.
+
+**Retrieval-lastige Workloads.** Wenn die Antwort im abgerufenen Kontext steht und das Modell sie nur extrahieren und formatieren muss, fügt die Deliberation eines Reasoning-Modells Latenz hinzu, ohne Genauigkeit hinzuzufügen. RAG-Pipelines brauchen fast nie Reasoning-Modelle.
+
+**Echtzeit-Interaktionen.** Chatbots, Autocomplete, Suchvorschläge. Nutzer bemerken Latenz stärker als marginale Qualitätsverbesserungen. Eine Antwort, die acht Sekunden dauert, ist schlechter als eine etwas weniger perfekte Antwort, die eine Sekunde dauert.
+
+**Batch Processing.** Wenn du zehntausend Dokumente verarbeitest, bedeutet ein 50×-Kostenmultiplikator den Unterschied zwischen einer 200-€-Rechnung und einer 10.000-€-Rechnung. Wenn die Genauigkeitsverbesserung nicht direkt einen Verlust von mehr als 9.800 € verhindert, geht die Rechnung nicht auf.
+
+## Die hybride Architektur
+
+Die Teams mit den besten Ergebnissen nutzen einen gestuften Ansatz:
+
+- **Schnelle Modelle für Generierung.** Drafts, Zusammenfassungen und First-Pass-Outputs bei hoher Geschwindigkeit und niedrigen Kosten produzieren.
+- **Reasoning-Modelle für Evaluation.** Die Outputs der schnellen Modelle bewerten, ranken und verifizieren. Fehler fangen, bevor sie den Nutzer erreichen.
+- **Routing-Logik dazwischen.** Ein leichtgewichtiger Classifier, der den Input ansieht und entscheidet: Braucht das Denkzeit, oder ist es straightforward? Der Classifier selbst ist günstig. Die Einsparungen dadurch, 80 % der Anfragen an die schnelle Stufe zu routen, sind enorm.
+
+Das ist nicht theoretisch. So funktioniert heute jedes kostenbewusste Produktivsystem. Die Teams, die Reasoning-Modelle überall deployen, werden entweder von Investoren finanziert, die noch nicht nach Unit Economics gefragt haben, oder sie haben die Rechnung noch nicht gesehen.
+
+## Die echten Kosten
+
+Der Stückerpreis pro Token ist der offensichtliche Kostenfaktor. Der versteckte Kostenfaktor ist Latenz. Reasoning-Modelle brauchen 5–15 Sekunden pro Antwort. In einem interaktiven Workflow heißt das: Nutzer warten. In einer automatisierten Pipeline heißt das: Durchsatz sinkt. In einem Echtzeit-System heißt das: nicht einsetzbar. Kalkuliere die vollen Kosten — Geld, Zeit und User Experience — bevor du entscheidest, wo du deployst.

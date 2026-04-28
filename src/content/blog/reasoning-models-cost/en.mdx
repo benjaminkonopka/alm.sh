@@ -1,0 +1,39 @@
+## Not every question deserves ten seconds of thinking.
+
+The reasoning model hype cycle has reached the "put it everywhere" phase. Teams are swapping GPT-4o for o3 and Claude Opus with extended thinking across every use case, because more thinking must mean better results. The invoice at the end of the month tells a different story.
+
+Reasoning models cost between 10× and 50× more per token than their fast counterparts. That delta is not a bug. It is the price of a fundamentally different architecture — one that allocates compute to deliberation before generating a response. The question is not whether reasoning models are better. They are. The question is: **better at what, and is the delta worth it for your specific workload?**
+
+## When they are worth every cent
+
+**Multi-step logic problems.** Tax calculations, regulatory compliance checks, contract analysis — anything where a wrong intermediate step produces a confidently wrong final answer. Reasoning models catch the error at step three instead of propagating it to step ten.
+
+**Code generation with constraints.** Writing code that must satisfy multiple simultaneous requirements — performance, security, API compatibility — benefits enormously from a model that plans before it writes. The cost of a reasoning model call is trivial compared to the cost of debugging code that a fast model got subtly wrong.
+
+**Ambiguous instructions.** When the input is underspecified, a reasoning model is more likely to identify the ambiguity and ask for clarification or handle edge cases. A fast model will pick one interpretation and run with it, which is fine when the stakes are low and catastrophic when they are not.
+
+**Evaluation and ranking.** Using a reasoning model as a judge — to evaluate outputs from cheaper models — is one of the highest-ROI patterns in production AI. The reasoning model sees nuances that a fast model misses, and you only pay the premium on the evaluation step, not on every generation.
+
+## When they burn money for nothing
+
+**High-volume, low-stakes generation.** Product descriptions, social media variants, email subject lines. The output quality difference between a reasoning model and a fast model is imperceptible to the end user, but the cost difference is 20×.
+
+**Retrieval-heavy workloads.** If the answer is in the retrieved context and the model just needs to extract and format it, a reasoning model's deliberation adds latency without adding accuracy. RAG pipelines almost never need reasoning models.
+
+**Real-time interactions.** Chatbots, autocomplete, search suggestions. Users notice latency more than they notice marginal quality improvements. A response that takes eight seconds is worse than a slightly less perfect response that takes one.
+
+**Batch processing.** When you are processing ten thousand documents, a 50× cost multiplier means the difference between a $200 bill and a $10,000 bill. Unless the accuracy improvement directly prevents a loss larger than $9,800, the math does not work.
+
+## The hybrid architecture
+
+The teams getting the best results use a tiered approach:
+
+- **Fast models for generation.** Produce drafts, summaries, and first-pass outputs at high speed and low cost.
+- **Reasoning models for evaluation.** Score, rank, and verify the outputs of the fast models. Catch errors before they reach the user.
+- **Routing logic in between.** A lightweight classifier that looks at the input and decides: does this need thinking time, or is it straightforward? The classifier itself is cheap. The savings from routing 80% of queries to the fast tier are enormous.
+
+This is not theoretical. It is how every cost-conscious production system works today. The teams that deploy reasoning models everywhere are either funded by investors who have not asked about unit economics, or they have not looked at the bill yet.
+
+## The real cost
+
+The sticker price per token is the obvious cost. The hidden cost is latency. Reasoning models take 5–15 seconds per response. In an interactive workflow, that means your users are waiting. In an automated pipeline, that means your throughput drops. In a real-time system, that means you cannot use them at all. Factor in the full cost — money, time, and user experience — before deciding where to deploy.

@@ -1,0 +1,36 @@
+## Everybody has an agent demo. Nobody has an agent in production.
+
+The pitch is always the same: an autonomous AI that takes a client brief, writes the copy, generates the visuals, pushes it through compliance, and schedules the campaign — all while you're asleep. We've seen this slide at every conference this year. We've also shipped agentic workflows for real clients. The gap between the two is enormous.
+
+The demo works because it operates in a vacuum. The production system has to survive messy briefs, brand guidelines that contradict each other, approval chains with four stakeholders, and a CMS that was last updated in 2019. These are not engineering problems. They are organizational problems that happen to need engineering.
+
+## Where agents actually deliver value
+
+The sweet spot is not autonomy. It is **structured handoffs between humans and machines**, where each does what it is better at.
+
+**Draft generation with guardrails.** An agent that takes a brief and produces three headline variants with a rationale for each is useful. An agent that publishes without review is a liability. The value is in compressing the first 80% of creative work from two days to twenty minutes — not in removing the human entirely.
+
+**QA and consistency checks.** Running every asset through a brand-voice model, a legal-term scanner, and a format validator before a human ever sees it. This catches the things that humans miss at 4 PM on a Friday, and it scales across fifty clients without hiring fifty QA leads.
+
+**Orchestration across tools.** Most agency work involves stitching together six to ten platforms — CMS, ad manager, analytics, DAM, project management, reporting. An agent that moves data between these systems, flags inconsistencies, and surfaces what needs attention is worth more than one that writes copy.
+
+## Where they break
+
+**Ambiguous inputs.** Agents need structured context. "Make it pop" is not a prompt a machine can act on, and most client briefs are closer to "make it pop" than to a structured spec. The teams that succeed invest heavily in brief templates that produce agent-ready inputs.
+
+**Multi-stakeholder approval.** An agent can generate options. It cannot navigate the politics of a brand team, a legal department, and a regional marketing lead disagreeing about tone. The moment you need consensus, you need a human in the loop.
+
+**Error compounding.** In a linear workflow, a mistake in step one propagates through every subsequent step. Agents are fast — which means they compound errors faster than humans can catch them. Every agentic pipeline needs checkpoints, not just a final review.
+
+## The operational shift
+
+The agencies getting value from agentic workflows have restructured around them. They do not bolt agents onto existing processes. They redesign the process:
+
+- **Briefs are structured data**, not PDFs. If the brief is not machine-readable, the agent cannot use it.
+- **Humans review at defined checkpoints**, not at the end. The earlier you catch a bad direction, the less the agent wastes.
+- **Feedback loops are built in.** Every human correction becomes training signal — not immediately for the model, but for the prompt templates and guardrails that shape agent behavior.
+- **Pricing reflects the new cost structure.** If an agent does in twenty minutes what used to take two days, the old hourly billing model breaks. The agencies that win are the ones that price on outcomes, not on time.
+
+## The uncomfortable truth
+
+Agentic AI does not make agencies more efficient at doing the same things. It makes certain things so cheap that they stop being services. The value of an agency shifts from execution to judgment — knowing what to build, what to say, and what to kill. That was always the hard part. Now it is the only part.

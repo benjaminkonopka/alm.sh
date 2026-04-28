@@ -2,26 +2,19 @@
 
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
-import { usePathname, useRouter } from "@/i18n/routing";
-import { useParams } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { usePathname, useRouter, routing } from "@/i18n/routing";
 import styles from "./LangSwitch.module.css";
 
 export function LangSwitch() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const params = useParams();
   const [, startTransition] = useTransition();
 
-  const switchTo = (target: string) => {
+  const switchTo = (target: (typeof routing.locales)[number]) => {
     if (target === locale) return;
     startTransition(() => {
-      router.replace(
-        // @ts-expect-error — dynamic params forwarded as-is
-        { pathname, params },
-        { locale: target as (typeof routing.locales)[number] }
-      );
+      router.replace(pathname, { locale: target });
     });
   };
 
