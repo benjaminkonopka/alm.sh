@@ -33,7 +33,7 @@ export function CaseStudies({ locale }: Props) {
 
       {cases.map((c, i) => {
         const num = (i + 1).toString().padStart(2, "0");
-        const metrics = c.frontmatter.metrics ?? [];
+        const metrics = Array.isArray(c.frontmatter.metrics) ? c.frontmatter.metrics : [];
         const visualLabel =
           PILLAR_LABEL[c.frontmatter.positioning_pillar ?? ""] ??
           c.frontmatter.industry ??
@@ -74,6 +74,16 @@ export function CaseStudies({ locale }: Props) {
           </div>
         );
       })}
+
+      {fm.link_label && fm.link_href && (
+        <div className="container">
+          <div className={`${styles.footer} reveal`}>
+            <Link href={fm.link_href} className={styles.allLink}>
+              {fm.link_label} <span className="arrow">→</span>
+            </Link>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
