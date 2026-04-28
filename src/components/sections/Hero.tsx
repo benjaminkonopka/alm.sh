@@ -1,9 +1,24 @@
-import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { getSection } from "@/lib/content";
 import styles from "./Hero.module.css";
 
-export function Hero() {
-  const t = useTranslations("hero");
+type HeroFrontmatter = {
+  eyebrow?: string;
+  headline?: string;
+  subline?: string;
+  scroll?: string;
+  ctas?: { label: string; href: string; variant?: "primary" | "secondary" }[];
+  meta?: string[];
+};
+
+type Props = { locale: string };
+
+export function Hero({ locale }: Props) {
+  const { frontmatter } = getSection("hero", locale);
+  const fm = frontmatter as HeroFrontmatter;
+
+  const ctas = fm.ctas ?? [];
+  const meta = fm.meta ?? [];
 
   return (
     <section className={styles.hero}>
@@ -11,32 +26,36 @@ export function Hero() {
         <div className="reveal">
           <div className={styles.eyebrow}>
             <div className={styles.eyebrowLine} />
-            <span>{t("eyebrow")}</span>
+            <span>{fm.eyebrow}</span>
           </div>
         </div>
-        <h1
-          className={`${styles.headline} reveal reveal-delay-1`}
-          dangerouslySetInnerHTML={{ __html: t.raw("headline") }}
-        />
-        <p className={`${styles.subline} reveal reveal-delay-2`}>
-          {t("subline")}
-        </p>
+        <h1 className={`${styles.headline} reveal reveal-delay-1`}>
+          {fm.headline?.split("\n").map((line, i, arr) => (
+            <span key={i}>
+              {line}
+              {i < arr.length - 1 && <br />}
+            </span>
+          ))}
+        </h1>
+        <p className={`${styles.subline} reveal reveal-delay-2`}>{fm.subline}</p>
         <div className={`${styles.actions} reveal reveal-delay-3`}>
-          <Link href="/#work" className={styles.btnPrimary}>
-            {t("cta1")} <span className="arrow">→</span>
-          </Link>
-          <Link href="/#about" className={styles.btnGhost}>
-            {t("cta2")} <span className="arrow">→</span>
-          </Link>
+          {ctas.map((cta, i) => (
+            <Link
+              key={i}
+              href={cta.href}
+              className={cta.variant === "primary" ? styles.btnPrimary : styles.btnGhost}
+            >
+              {cta.label} <span className="arrow">→</span>
+            </Link>
+          ))}
         </div>
         <div className={`${styles.meta} reveal reveal-delay-4`}>
-          <span className={styles.metaItem}>{t("meta1")}</span>
-          <div className={styles.metaDot} />
-          <span className={styles.metaItem}>{t("meta2")}</span>
-          <div className={styles.metaDot} />
-          <span className={styles.metaItem}>{t("meta3")}</span>
-          <div className={styles.metaDot} />
-          <span className={styles.metaItem}>{t("meta4")}</span>
+          {meta.map((item, i) => (
+            <span key={i} style={{ display: "contents" }}>
+              <span className={styles.metaItem}>{item}</span>
+              {i < meta.length - 1 && <div className={styles.metaDot} />}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -54,10 +73,12 @@ export function Hero() {
         </video>
       </div>
 
-      <div className={styles.scroll}>
-        <div className={styles.scrollLine} />
-        <span className={styles.scrollText}>{t("scroll")}</span>
-      </div>
+      {fm.scroll && (
+        <div className={styles.scroll}>
+          <div className={styles.scrollLine} />
+          <span className={styles.scrollText}>{fm.scroll}</span>
+        </div>
+      )}
     </section>
   );
 }
