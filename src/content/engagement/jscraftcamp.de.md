@@ -20,7 +20,7 @@ teaser_body: JSCraftCamp ist eine der lebendigsten Manifestationen der Münchner
 
 ## Worum es geht
 
-JSCraftCamp ist eine jährliche Unconference für JavaScript-Entwickler:innen in München. Bei der TNG Technology Consulting in Unterföhring kommen rund 100 Teilnehmer:innen für zwei Tage zusammen — und das Programm entsteht am Veranstaltungs-Morgen, gestaltet von den Menschen, die da sind. Themen werden vorgeschlagen, gewählt, geteilt. Keine Keynotes. Keine festen Tracks. Keine Hierarchien.
+Einmal im Jahr füllt sich die TNG Technology Consulting in Unterföhring mit rund hundert JavaScript-Entwickler:innen aus München und Umgebung. Zwei Tage Unconference — kein vorgegebenes Programm, sondern eines, das am Veranstaltungs-Morgen entsteht: Themen werden vorgeschlagen, gemeinsam gewählt, und wer etwas zu sagen hat, übernimmt einen der Räume. Keine Keynote-Stars, keine festen Tracks, keine Hierarchien. Nur Menschen, die etwas wissen, und Menschen, die etwas wissen wollen.
 
 ## Warum uns das wichtig ist
 
