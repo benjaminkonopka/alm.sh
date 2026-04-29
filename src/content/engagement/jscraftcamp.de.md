@@ -14,20 +14,26 @@ tags:
   - Community
   - München
   - Unconference
-teaser_headline: Manche Events brauchen kein Marketing — die unterstützen wir gern.
-teaser_body: JSCraftCamp ist Unconference-Format in München — Sessions entstehen vor Ort, keine Keynote-Stars, keine festen Tracks. Entwickler:innen reden direkt miteinander, ohne durch Folien zu pitchen. Wir sind als Sponsor dabei, weil wir selbst hingehen.
+teaser_headline: Eine starke Tech-Community in München ist uns wichtig — und wir wollen unseren Teil dazu beitragen.
+teaser_body: JSCraftCamp ist eine der lebendigsten Manifestationen der Münchner JavaScript-Szene — eine Unconference, in der Sessions vor Ort entstehen und Wissen ohne Filter geteilt wird. Wir sind als Sponsor dabei, weil wir hier verwurzelt sind, an die Kraft solcher Treffen glauben — und weil wir selbst zuhören wollen, was unsere Community gerade bewegt.
 ---
 
 ## Worum es geht
 
-JSCraftCamp ist eine jährliche Unconference für JavaScript-Entwickler:innen in München. Bei der TNG Technology Consulting in Unterföhring, etwa 100 Teilnehmer:innen, zwei Tage. Das Programm entsteht am Veranstaltungs-Morgen — Themen werden von den Teilnehmenden vorgeschlagen, gewählt, und die, die etwas zu sagen haben, geben es weiter.
+JSCraftCamp ist eine jährliche Unconference für JavaScript-Entwickler:innen in München. Bei der TNG Technology Consulting in Unterföhring kommen rund 100 Teilnehmer:innen für zwei Tage zusammen — und das Programm entsteht am Veranstaltungs-Morgen, gestaltet von den Menschen, die da sind. Themen werden vorgeschlagen, gewählt, geteilt. Keine Keynotes. Keine festen Tracks. Keine Hierarchien.
 
-## Warum wir mitmachen
+## Warum uns das wichtig ist
 
-In den meisten Sponsoring-Slides einer Agentur stünde an dieser Stelle ein Absatz darüber, wie wichtig uns Community ist und wie sehr wir „in Talente investieren". Auf JSCraftCamp gehört das nicht hin — die Veranstaltung verzichtet ausdrücklich auf *sponsored presentations* und Top-Down-Organisation. Ein Sponsoring ohne Werbeplatz, sozusagen.
+München ist für uns mehr als ein Standort. Es ist die Stadt, in der unser Team lebt, arbeitet und sich weiterentwickelt — und in der die Tech-Community, von der wir Teil sind, jeden Tag stattfindet. Wenn wir gut werden in dem, was wir tun, dann nicht aus Webinaren, LinkedIn-Threads oder Konferenz-Folien. Sondern aus echten Gesprächen mit Entwickler:innen, die andere Wege gehen, andere Probleme lösen, andere Perspektiven mitbringen.
 
-Wir sind trotzdem dabei, weil wir selbst aus dieser Ecke kommen: JavaScript, ein Format in dem Entwickler:innen miteinander reden statt zu Folien zu sprechen, und ein Münchner Bezug, der ohne Reisekosten funktioniert.
+Wir glauben, dass eine starke, lebendige, lokale Tech-Community keine Selbstverständlichkeit ist. Sie entsteht nur, wenn Menschen sich regelmäßig zusammenfinden, ihr Wissen teilen, einander zuhören — und wenn Unternehmen, die selbst von dieser Community leben, ihren Teil dazu beitragen, dass es sie weiter gibt.
 
-## Die Realität
+JSCraftCamp ist genau so ein Ort. Eine Veranstaltung, die ohne kommerzielle Pitch-Logik auskommt, ohne Top-Down-Struktur, ohne Marketing-Filter. Genau die Sorte Treffen, die wir uns für unsere Stadt wünschen — und genau deshalb sind wir gerne dabei.
 
-Wer auf JSCraftCamp eine alm-Folie erwartet, wird enttäuscht sein. Wer mit uns reden will, läuft uns wahrscheinlich über den Weg.
+## Was wir uns davon versprechen
+
+Wir versprechen uns nichts davon. Das ist kein Marketing-Move.
+
+Wir sind als Sponsor dabei, weil wir an die Sache glauben. Weil wir selbst regelmäßig hingehen. Weil wir zuhören wollen, was unsere Szene gerade beschäftigt — welche Werkzeuge an Bedeutung gewinnen, welche Probleme gerade jeden umtreiben, welche Ansätze sich bewähren. Ein Großteil der Inspiration, mit der wir am Montag wieder in den Code gehen, kommt aus genau solchen Gesprächen am Rand einer Unconference-Session.
+
+Und nicht zuletzt: weil eine Software-Bude, die nur in der eigenen Blase lebt, irgendwann auch nur in der eigenen Blase relevant ist. Wer ernsthaft Software bauen will, muss in Kontakt bleiben mit den Menschen, die sie ebenfalls bauen. JSCraftCamp ist für uns einer der Orte, an denen das passiert.
